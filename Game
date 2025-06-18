@@ -270,6 +270,17 @@
                     {name: 'Teaching Others', icon: '👨‍🏫', description: 'Teach someone else a skill'}
                 ]
             },
+            'Financial Literacy': {
+                icon: '💰',
+                skills: [
+                    {name: 'Budget Master', icon: '📊', description: 'Create and follow a monthly budget'},
+                    {name: 'Emergency Fund', icon: '🛡️', description: 'Build 3-month emergency fund'},
+                    {name: 'Investment Start', icon: '📈', description: 'Make your first investment'},
+                    {name: 'Debt Free', icon: '🆓', description: 'Pay off all consumer debt'},
+                    {name: 'Side Hustle', icon: '💼', description: 'Start a profitable side business'},
+                    {name: 'Financial Goals', icon: '🎯', description: 'Achieve major financial milestone'}
+                ]
+            },
             'Social & Relationships': {
                 icon: '👥',
                 skills: [
