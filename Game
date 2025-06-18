@@ -292,17 +292,6 @@
                     {name: 'Conflict Resolution', icon: '☮️', description: 'Successfully resolve a conflict'}
                 ]
             },
-            'Financial Literacy': {
-                icon: '💰',
-                skills: [
-                    {name: 'Budget Master', icon: '📊', description: 'Create and follow a monthly budget'},
-                    {name: 'Emergency Fund', icon: '🛡️', description: 'Build 3-month emergency fund'},
-                    {name: 'Investment Start', icon: '📈', description: 'Make your first investment'},
-                    {name: 'Debt Free', icon: '🆓', description: 'Pay off all consumer debt'},
-                    {name: 'Side Hustle', icon: '💼', description: 'Start a profitable side business'},
-                    {name: 'Financial Goals', icon: '🎯', description: 'Achieve major financial milestone'}
-                ]
-            },
             'Life Skills': {
                 icon: '🏡',
                 skills: [
@@ -310,6 +299,7 @@
                     {name: 'Home Repair', icon: '🔧', description: 'Learn basic home maintenance'},
                     {name: 'Time Management', icon: '⏰', description: 'Master productivity system'},
                     {name: 'Public Speaking', icon: '🎤', description: 'Give a confident public presentation'},
+                    {name: 'dying', icon: '🎤', description: 'Face your mortality'},
                     {name: 'First Aid', icon: '🚑', description: 'Get certified in first aid/CPR'},
                     {name: 'Life Organization', icon: '📋', description: 'Organize all areas of life'}
                 ]
