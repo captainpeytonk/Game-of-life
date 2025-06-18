@@ -31,14 +31,9 @@
         }
 
         .header h1 {
-            font-size: 3rem;
+            font-size: 3em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
         }
 
         .back-btn {
@@ -61,115 +56,68 @@
             transform: translateY(-2px);
         }
 
-        /* Main Categories Grid */
-        .categories-grid {
+        .categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
         .category-card {
             background: rgba(255,255,255,0.95);
             border-radius: 20px;
             padding: 30px;
+            text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .category-card:hover::before {
-            left: 100%;
         }
 
         .category-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .category-icon {
-            font-size: 3rem;
+        .category-card h2 {
+            font-size: 2em;
             margin-bottom: 15px;
-            display: block;
+            color: #4a5568;
         }
 
-        .category-title {
-            font-size: 1.5rem;
+        .category-level {
+            font-size: 1.5em;
             font-weight: bold;
+            color: #667eea;
             margin-bottom: 10px;
-            color: #4a5568;
         }
 
-        .category-description {
-            color: #718096;
-            line-height: 1.6;
+        .category-exp {
+            color: #666;
+            font-size: 1.1em;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            margin-top: 15px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-
-        .progress-text {
-            text-align: center;
-            margin-top: 8px;
-            font-size: 0.9rem;
-            color: #4a5568;
-            font-weight: 600;
-        }
-
-        /* Skills Page */
-        .skills-container {
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .skills-page {
+            display: none;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
         }
 
         .skill-card {
-            background: #f8fafc;
+            background: rgba(255,255,255,0.95);
             border-radius: 15px;
-            padding: 20px;
-            border: 2px solid transparent;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             transition: all 0.3s ease;
         }
 
         .skill-card:hover {
-            border-color: #4facfe;
-            transform: translateY(-2px);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 
         .skill-header {
@@ -177,726 +125,518 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            cursor: pointer;
         }
 
         .skill-title {
-            font-size: 1.2rem;
+            font-size: 1.4em;
             font-weight: bold;
-            color: #2d3748;
+            color: #4a5568;
         }
 
-        .expand-btn {
-            background: #4facfe;
+        .skill-level {
+            background: #667eea;
             color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            font-size: 18px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .skill-exp {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .exp-bar {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .exp-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .sub-skills {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .sub-skills.expanded {
+            display: block;
+        }
+
+        .sub-skill {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: #f7fafc;
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
 
-        .expand-btn:hover {
-            background: #3182ce;
-            transform: rotate(180deg);
+        .sub-skill:hover {
+            background: #edf2f7;
         }
 
-        .expand-btn.expanded {
-            transform: rotate(45deg);
-        }
-
-        .skill-dropdown {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .skill-dropdown.expanded {
-            max-height: 500px;
-        }
-
-        .building-block {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .building-block:last-child {
-            border-bottom: none;
-        }
-
-        .building-block input[type="checkbox"] {
-            margin-right: 12px;
+        .sub-skill input[type="checkbox"] {
+            margin-right: 10px;
             transform: scale(1.2);
-            cursor: pointer;
         }
 
-        .building-block label {
-            cursor: pointer;
+        .sub-skill label {
             flex: 1;
-            font-weight: 500;
+            cursor: pointer;
         }
 
-        .building-block input[type="checkbox"]:checked + label {
-            text-decoration: line-through;
-            opacity: 0.7;
+        .sub-skill-exp {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
         }
 
-        .hidden {
+        .modal {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalPop 0.5s ease;
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease;
+        @keyframes modalPop {
+            from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 10px;
-            }
+        .modal h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .expand-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <button class="back-btn hidden" onclick="goBack()">← Back</button>
-        
-        <div class="header">
-            <h1 id="page-title">Skill Tree</h1>
-            <p id="page-subtitle">Choose a category to develop your abilities</p>
+        <!-- Main Categories Page -->
+        <div id="main-page">
+            <div class="header">
+                <h1>🌟 Skill Tree</h1>
+                <p>Develop your abilities and track your progress</p>
+            </div>
+            
+            <div class="categories" id="categories">
+                <!-- Categories will be populated by JavaScript -->
+            </div>
         </div>
 
-        <!-- Main Categories View -->
-        <div id="categories-view" class="categories-grid fade-in">
-            <!-- Categories will be populated by JavaScript -->
-        </div>
-
-        <!-- Skills View -->
-        <div id="skills-view" class="skills-container hidden">
+        <!-- Skills Page -->
+        <div id="skills-page" class="skills-page">
+            <button class="back-btn" onclick="showMainPage()">← Back to Categories</button>
+            <div class="header">
+                <h1 id="category-title"></h1>
+            </div>
             <div class="skills-grid" id="skills-grid">
                 <!-- Skills will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
+    <!-- Level Up Modal -->
+    <div id="levelUpModal" class="modal">
+        <div class="modal-content">
+            <h2>🎉 Congratulations!</h2>
+            <p id="levelUpText"></p>
+            <button onclick="closeLevelUpModal()">Continue</button>
+        </div>
+    </div>
+
     <script>
-        // Skill tree data structure
-        const skillTreeData = {
+        // Data structure for skills and categories
+        const skillData = {
             'verbal-linguistic': {
-                title: 'Verbal-Linguistic',
-                icon: '📚',
-                description: 'Master the art of words, language, and communication',
+                name: 'Verbal-Linguistic',
                 skills: {
                     'reading': {
-                        title: 'Reading',
-                        buildingBlocks: [
-                            'Read 10 books this year',
-                            'Read a classic novel',
-                            'Read non-fiction book',
-                            'Read poetry collection',
-                            'Speed reading techniques'
+                        name: 'Reading',
+                        subSkills: [
+                            { name: 'Read 10 books', exp: 50, completed: false },
+                            { name: 'Read 25 books', exp: 75, completed: false },
+                            { name: 'Read 50 books', exp: 100, completed: false },
+                            { name: 'Read a classic novel', exp: 60, completed: false },
+                            { name: 'Read non-fiction', exp: 40, completed: false }
                         ]
                     },
                     'writing': {
-                        title: 'Writing',
-                        buildingBlocks: [
-                            'Write daily journal',
-                            'Complete a short story',
-                            'Write a blog post',
-                            'Learn essay structure',
-                            'Creative writing exercises'
+                        name: 'Writing',
+                        subSkills: [
+                            { name: 'Write daily journal', exp: 30, completed: false },
+                            { name: 'Write a short story', exp: 80, completed: false },
+                            { name: 'Write a poem', exp: 40, completed: false },
+                            { name: 'Write an essay', exp: 60, completed: false },
+                            { name: 'Start a blog', exp: 70, completed: false }
                         ]
                     },
-                    'new-language': {
-                        title: 'Learn a New Language',
-                        subSkills: {
-                            'japanese': {
-                                title: 'Japanese',
-                                buildingBlocks: [
-                                    'Learn Hiragana',
-                                    'Learn Katakana',
-                                    'Learn 10 Kanji',
-                                    'Learn 50 Kanji',
-                                    'Learn 100 Kanji',
-                                    'Read a story in Japanese',
-                                    'Read a news article',
-                                    'Have basic conversation'
-                                ]
-                            },
-                            'french': {
-                                title: 'French',
-                                buildingBlocks: [
-                                    'Learn basic pronunciation',
-                                    'Master 100 common words',
-                                    'Learn present tense verbs',
-                                    'Practice daily conversations',
-                                    'Read French children\'s book',
-                                    'Watch French movie with subtitles'
-                                ]
-                            },
-                            'spanish': {
-                                title: 'Spanish',
-                                buildingBlocks: [
-                                    'Learn alphabet and sounds',
-                                    'Master 200 vocabulary words',
-                                    'Learn verb conjugations',
-                                    'Practice pronunciation',
-                                    'Have 10-minute conversation',
-                                    'Read Spanish news article'
-                                ]
-                            }
-                        }
+                    'learn-language': {
+                        name: 'Learn a New Language',
+                        subSkills: [
+                            { name: 'Choose target language', exp: 10, completed: false },
+                            { name: 'Learn basic greetings', exp: 20, completed: false },
+                            { name: 'Master 100 words', exp: 50, completed: false },
+                            { name: 'Hold basic conversation', exp: 100, completed: false },
+                            { name: 'Watch movie in target language', exp: 80, completed: false }
+                        ]
+                    },
+                    'japanese': {
+                        name: 'Japanese',
+                        subSkills: [
+                            { name: 'Learn Hiragana', exp: 10, completed: false },
+                            { name: 'Learn Katakana', exp: 15, completed: false },
+                            { name: 'Learn 10 Kanji', exp: 20, completed: false },
+                            { name: 'Learn 50 Kanji', exp: 40, completed: false },
+                            { name: 'Learn 100 Kanji', exp: 60, completed: false },
+                            { name: 'Read a story in Japanese', exp: 80, completed: false },
+                            { name: 'Read a news article', exp: 100, completed: false }
+                        ]
                     },
                     'storytelling': {
-                        title: 'Storytelling',
-                        buildingBlocks: [
-                            'Learn story structure',
-                            'Practice character development',
-                            'Tell story to audience',
-                            'Use voice modulation',
-                            'Master pacing techniques'
+                        name: 'Story Telling',
+                        subSkills: [
+                            { name: 'Tell a personal story', exp: 30, completed: false },
+                            { name: 'Create fictional character', exp: 40, completed: false },
+                            { name: 'Practice voice modulation', exp: 50, completed: false },
+                            { name: 'Tell story to children', exp: 60, completed: false },
+                            { name: 'Record storytelling video', exp: 80, completed: false }
                         ]
                     },
                     'teaching': {
-                        title: 'Teaching',
-                        buildingBlocks: [
-                            'Teach someone a skill',
-                            'Create lesson plan',
-                            'Practice public speaking',
-                            'Learn different learning styles',
-                            'Give constructive feedback'
+                        name: 'Teaching',
+                        subSkills: [
+                            { name: 'Explain concept to friend', exp: 30, completed: false },
+                            { name: 'Create lesson plan', exp: 50, completed: false },
+                            { name: 'Teach online tutorial', exp: 70, completed: false },
+                            { name: 'Mentor someone', exp: 90, completed: false },
+                            { name: 'Get teaching certification', exp: 120, completed: false }
                         ]
                     },
                     'acting': {
-                        title: 'Acting',
-                        buildingBlocks: [
-                            'Practice basic emotions',
-                            'Learn voice projection',
-                            'Study method acting',
-                            'Perform in front of mirror',
-                            'Join acting class or group'
+                        name: 'Acting',
+                        subSkills: [
+                            { name: 'Practice basic expressions', exp: 25, completed: false },
+                            { name: 'Memorize monologue', exp: 50, completed: false },
+                            { name: 'Join acting class', exp: 70, completed: false },
+                            { name: 'Perform in local theater', exp: 100, completed: false },
+                            { name: 'Create character backstory', exp: 60, completed: false }
                         ]
                     }
                 }
             },
             'mathematical-logical': {
-                title: 'Mathematical-Logical',
-                icon: '🔢',
-                description: 'Develop analytical thinking and mathematical reasoning',
+                name: 'Mathematical-Logical',
                 skills: {
                     'basic-math': {
-                        title: 'Basic Mathematics',
-                        buildingBlocks: [
-                            'Master multiplication tables',
-                            'Practice mental arithmetic',
-                            'Solve word problems',
-                            'Learn fractions and decimals',
-                            'Understand percentages'
+                        name: 'Basic Mathematics',
+                        subSkills: [
+                            { name: 'Master multiplication tables', exp: 30, completed: false },
+                            { name: 'Solve algebraic equations', exp: 50, completed: false },
+                            { name: 'Understand fractions', exp: 40, completed: false },
+                            { name: 'Calculate percentages', exp: 35, completed: false },
+                            { name: 'Work with decimals', exp: 35, completed: false }
+                        ]
+                    },
+                    'geometry': {
+                        name: 'Geometry',
+                        subSkills: [
+                            { name: 'Identify basic shapes', exp: 20, completed: false },
+                            { name: 'Calculate area and perimeter', exp: 40, completed: false },
+                            { name: 'Understand angles', exp: 45, completed: false },
+                            { name: 'Work with triangles', exp: 60, completed: false },
+                            { name: 'Master Pythagorean theorem', exp: 70, completed: false }
+                        ]
+                    },
+                    'statistics': {
+                        name: 'Statistics',
+                        subSkills: [
+                            { name: 'Calculate mean and median', exp: 30, completed: false },
+                            { name: 'Understand probability', exp: 50, completed: false },
+                            { name: 'Create graphs and charts', exp: 45, completed: false },
+                            { name: 'Analyze data trends', exp: 70, completed: false },
+                            { name: 'Conduct statistical test', exp: 90, completed: false }
                         ]
                     },
                     'programming': {
-                        title: 'Programming',
-                        buildingBlocks: [
-                            'Learn a programming language',
-                            'Build first application',
-                            'Understand algorithms',
-                            'Practice debugging',
-                            'Complete coding challenges'
+                        name: 'Programming',
+                        subSkills: [
+                            { name: 'Learn programming basics', exp: 40, completed: false },
+                            { name: 'Write first program', exp: 60, completed: false },
+                            { name: 'Understand loops and conditions', exp: 80, completed: false },
+                            { name: 'Build a simple app', exp: 120, completed: false },
+                            { name: 'Learn data structures', exp: 100, completed: false }
                         ]
                     },
                     'logic-puzzles': {
-                        title: 'Logic Puzzles',
-                        buildingBlocks: [
-                            'Solve Sudoku puzzles',
-                            'Complete logic grid puzzles',
-                            'Master chess basics',
-                            'Practice riddles',
-                            'Learn strategic thinking'
-                        ]
-                    }
-                }
-            },
-            'musical': {
-                title: 'Musical',
-                icon: '🎵',
-                description: 'Explore rhythm, melody, and musical expression',
-                skills: {
-                    'instrument': {
-                        title: 'Learn an Instrument',
-                        subSkills: {
-                            'piano': {
-                                title: 'Piano',
-                                buildingBlocks: [
-                                    'Learn basic finger positions',
-                                    'Practice scales',
-                                    'Play simple melodies',
-                                    'Learn to read sheet music',
-                                    'Play a complete song'
-                                ]
-                            },
-                            'guitar': {
-                                title: 'Guitar',
-                                buildingBlocks: [
-                                    'Learn basic chords',
-                                    'Practice strumming patterns',
-                                    'Play simple songs',
-                                    'Learn fingerpicking',
-                                    'Write original chord progression'
-                                ]
-                            }
-                        }
-                    },
-                    'music-theory': {
-                        title: 'Music Theory',
-                        buildingBlocks: [
-                            'Learn note names',
-                            'Understand scales',
-                            'Study chord progressions',
-                            'Learn rhythm patterns',
-                            'Analyze song structures'
-                        ]
-                    }
-                }
-            },
-            'visual-spatial': {
-                title: 'Visual-Spatial',
-                icon: '🎨',
-                description: 'Develop visual thinking and spatial awareness',
-                skills: {
-                    'drawing': {
-                        title: 'Drawing',
-                        buildingBlocks: [
-                            'Practice basic shapes',
-                            'Learn shading techniques',
-                            'Draw from observation',
-                            'Study proportions',
-                            'Complete daily sketches'
+                        name: 'Logic Puzzles',
+                        subSkills: [
+                            { name: 'Solve sudoku puzzle', exp: 25, completed: false },
+                            { name: 'Complete logic grid', exp: 40, completed: false },
+                            { name: 'Master chess basics', exp: 70, completed: false },
+                            { name: 'Solve riddles daily', exp: 30, completed: false },
+                            { name: 'Complete escape room', exp: 80, completed: false }
                         ]
                     },
-                    'photography': {
-                        title: 'Photography',
-                        buildingBlocks: [
-                            'Learn composition rules',
-                            'Understand lighting',
-                            'Practice different angles',
-                            'Edit photos',
-                            'Create photo series'
-                        ]
-                    }
-                }
-            },
-            'bodily-kinesthetic': {
-                title: 'Bodily-Kinesthetic',
-                icon: '🏃',
-                description: 'Master physical movement and body coordination',
-                skills: {
-                    'fitness': {
-                        title: 'Physical Fitness',
-                        buildingBlocks: [
-                            'Exercise 30 minutes daily',
-                            'Learn proper form',
-                            'Increase flexibility',
-                            'Build strength',
-                            'Improve endurance'
-                        ]
-                    },
-                    'sports': {
-                        title: 'Sports Skills',
-                        buildingBlocks: [
-                            'Learn basic techniques',
-                            'Practice regularly',
-                            'Study game strategy',
-                            'Play with others',
-                            'Join team or league'
-                        ]
-                    }
-                }
-            },
-            'interpersonal': {
-                title: 'Interpersonal',
-                icon: '👥',
-                description: 'Build relationships and social understanding',
-                skills: {
-                    'communication': {
-                        title: 'Communication',
-                        buildingBlocks: [
-                            'Practice active listening',
-                            'Learn body language',
-                            'Give clear instructions',
-                            'Handle conflicts peacefully',
-                            'Show empathy'
-                        ]
-                    },
-                    'leadership': {
-                        title: 'Leadership',
-                        buildingBlocks: [
-                            'Lead a small project',
-                            'Practice delegation',
-                            'Make group decisions',
-                            'Motivate others',
-                            'Give presentations'
-                        ]
-                    }
-                }
-            },
-            'intrapersonal': {
-                title: 'Intrapersonal',
-                icon: '🧠',
-                description: 'Develop self-awareness and inner understanding',
-                skills: {
-                    'meditation': {
-                        title: 'Meditation',
-                        buildingBlocks: [
-                            'Practice daily meditation',
-                            'Learn breathing techniques',
-                            'Develop mindfulness',
-                            'Handle stress better',
-                            'Increase focus'
-                        ]
-                    },
-                    'self-reflection': {
-                        title: 'Self-Reflection',
-                        buildingBlocks: [
-                            'Keep daily journal',
-                            'Identify personal values',
-                            'Set meaningful goals',
-                            'Track progress',
-                            'Celebrate achievements'
-                        ]
-                    }
-                }
-            },
-            'naturalist': {
-                title: 'Naturalist',
-                icon: '🌱',
-                description: 'Connect with nature and understand living systems',
-                skills: {
-                    'gardening': {
-                        title: 'Gardening',
-                        buildingBlocks: [
-                            'Plant seeds',
-                            'Care for plants daily',
-                            'Learn about soil',
-                            'Study plant biology',
-                            'Harvest crops'
-                        ]
-                    },
-                    'wildlife': {
-                        title: 'Wildlife Study',
-                        buildingBlocks: [
-                            'Identify local birds',
-                            'Study animal behavior',
-                            'Track seasonal changes',
-                            'Create nature journal',
-                            'Participate in citizen science'
-                        ]
-                    }
-                }
-            },
-            'existential': {
-                title: 'Existential',
-                icon: '🤔',
-                description: 'Explore meaning, purpose, and big questions',
-                skills: {
-                    'philosophy': {
-                        title: 'Philosophy',
-                        buildingBlocks: [
-                            'Read philosophical texts',
-                            'Question assumptions',
-                            'Debate ethical issues',
-                            'Study different worldviews',
-                            'Develop personal philosophy'
-                        ]
-                    },
-                    'spirituality': {
-                        title: 'Spiritual Practice',
-                        buildingBlocks: [
-                            'Explore different traditions',
-                            'Practice gratitude',
-                            'Seek meaningful experiences',
-                            'Connect with community',
-                            'Find personal purpose'
+                    'financial-math': {
+                        name: 'Financial Mathematics',
+                        subSkills: [
+                            { name: 'Calculate compound interest', exp: 40, completed: false },
+                            { name: 'Understand loan payments', exp: 50, completed: false },
+                            { name: 'Budget monthly expenses', exp: 35, completed: false },
+                            { name: 'Learn investment basics', exp: 70, completed: false },
+                            { name: 'File tax returns', exp: 60, completed: false }
                         ]
                     }
                 }
             }
         };
 
-        // State management
-        let currentView = 'categories';
-        let currentCategory = null;
-        let skillProgress = JSON.parse(localStorage.getItem('skillProgress') || '{}');
+        // Progress tracking
+        let userProgress = {};
 
-        // Initialize the application
-        function init() {
-            renderCategories();
-            updateAllProgress();
+        // Initialize progress tracking
+        function initializeProgress() {
+            for (let categoryKey in skillData) {
+                userProgress[categoryKey] = {
+                    totalExp: 0,
+                    level: 0,
+                    skills: {}
+                };
+
+                for (let skillKey in skillData[categoryKey].skills) {
+                    userProgress[categoryKey].skills[skillKey] = {
+                        exp: 0,
+                        level: 0,
+                        completedSubSkills: []
+                    };
+                }
+            }
         }
 
-        // Render main categories
-        function renderCategories() {
-            const container = document.getElementById('categories-view');
-            container.innerHTML = '';
+        // Calculate level based on experience
+        function calculateLevel(exp) {
+            return Math.floor(exp / 100);
+        }
+
+        // Calculate experience needed for next level
+        function expToNextLevel(exp) {
+            const currentLevel = calculateLevel(exp);
+            const nextLevelExp = (currentLevel + 1) * 100;
+            return nextLevelExp - exp;
+        }
+
+        // Show level up modal
+        function showLevelUpModal(skillName, newLevel, categoryName = null) {
+            const modal = document.getElementById('levelUpModal');
+            const text = document.getElementById('levelUpText');
             
-            Object.keys(skillTreeData).forEach(categoryKey => {
-                const category = skillTreeData[categoryKey];
-                const progress = calculateCategoryProgress(categoryKey);
+            if (categoryName) {
+                text.textContent = `${categoryName} category reached level ${newLevel}!`;
+            } else {
+                text.textContent = `${skillName} skill reached level ${newLevel}!`;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        // Close level up modal
+        function closeLevelUpModal() {
+            document.getElementById('levelUpModal').style.display = 'none';
+        }
+
+        // Handle sub-skill completion
+        function toggleSubSkill(categoryKey, skillKey, subSkillIndex) {
+            const skill = skillData[categoryKey].skills[skillKey];
+            const subSkill = skill.subSkills[subSkillIndex];
+            
+            if (subSkill.completed) {
+                return; // Already completed
+            }
+
+            // Mark as completed
+            subSkill.completed = true;
+            
+            // Add experience
+            const oldSkillLevel = userProgress[categoryKey].skills[skillKey].level;
+            const oldCategoryLevel = userProgress[categoryKey].level;
+            
+            userProgress[categoryKey].skills[skillKey].exp += subSkill.exp;
+            userProgress[categoryKey].totalExp += subSkill.exp;
+            userProgress[categoryKey].skills[skillKey].completedSubSkills.push(subSkillIndex);
+            
+            // Update levels
+            const newSkillLevel = calculateLevel(userProgress[categoryKey].skills[skillKey].exp);
+            const newCategoryLevel = calculateLevel(userProgress[categoryKey].totalExp);
+            
+            userProgress[categoryKey].skills[skillKey].level = newSkillLevel;
+            userProgress[categoryKey].level = newCategoryLevel;
+            
+            // Show level up modals
+            if (newSkillLevel > oldSkillLevel) {
+                setTimeout(() => showLevelUpModal(skill.name, newSkillLevel), 100);
+            }
+            
+            if (newCategoryLevel > oldCategoryLevel) {
+                setTimeout(() => showLevelUpModal(skill.name, newCategoryLevel, skillData[categoryKey].name), 500);
+            }
+            
+            // Update UI
+            updateSkillsDisplay(categoryKey);
+            updateCategoriesDisplay();
+        }
+
+        // Display categories on main page
+        function updateCategoriesDisplay() {
+            const container = document.getElementById('categories');
+            container.innerHTML = '';
+
+            for (let categoryKey in skillData) {
+                const category = skillData[categoryKey];
+                const progress = userProgress[categoryKey];
                 
                 const card = document.createElement('div');
                 card.className = 'category-card';
-                card.onclick = () => showCategory(categoryKey);
+                card.onclick = () => showSkillsPage(categoryKey);
                 
                 card.innerHTML = `
-                    <div class="category-icon">${category.icon}</div>
-                    <div class="category-title">${category.title}</div>
-                    <div class="category-description">${category.description}</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${progress}%"></div>
-                    </div>
-                    <div class="progress-text">${progress}% Complete</div>
+                    <h2>${category.name}</h2>
+                    <div class="category-level">Level ${progress.level}</div>
+                    <div class="category-exp">${progress.totalExp} EXP</div>
                 `;
                 
                 container.appendChild(card);
-            });
+            }
         }
 
-        // Show specific category skills
-        function showCategory(categoryKey) {
-            currentCategory = categoryKey;
-            currentView = 'skills';
+        // Show skills page for a category
+        function showSkillsPage(categoryKey) {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('skills-page').style.display = 'block';
+            document.getElementById('category-title').textContent = skillData[categoryKey].name;
             
-            const category = skillTreeData[categoryKey];
-            
-            document.getElementById('page-title').textContent = category.title;
-            document.getElementById('page-subtitle').textContent = category.description;
-            document.getElementById('categories-view').classList.add('hidden');
-            document.getElementById('skills-view').classList.remove('hidden');
-            document.querySelector('.back-btn').classList.remove('hidden');
-            
-            renderSkills(category.skills);
+            updateSkillsDisplay(categoryKey);
         }
 
-        // Render skills for current category
-        function renderSkills(skills) {
+        // Show main page
+        function showMainPage() {
+            document.getElementById('main-page').style.display = 'block';
+            document.getElementById('skills-page').style.display = 'none';
+        }
+
+        // Update skills display
+        function updateSkillsDisplay(categoryKey) {
             const container = document.getElementById('skills-grid');
             container.innerHTML = '';
-            
-            Object.keys(skills).forEach(skillKey => {
-                const skill = skills[skillKey];
-                const skillCard = createSkillCard(skillKey, skill);
-                container.appendChild(skillCard);
-            });
-        }
 
-        // Create individual skill card
-        function createSkillCard(skillKey, skill) {
-            const card = document.createElement('div');
-            card.className = 'skill-card';
-            
-            const hasSubSkills = skill.subSkills;
-            const progress = calculateSkillProgress(currentCategory, skillKey);
-            
-            card.innerHTML = `
-                <div class="skill-header">
-                    <div class="skill-title">${skill.title}</div>
-                    <button class="expand-btn" onclick="toggleSkill('${skillKey}')">+</button>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: ${progress}%"></div>
-                </div>
-                <div class="progress-text">${progress}% Complete</div>
-                <div class="skill-dropdown" id="dropdown-${skillKey}">
-                    ${hasSubSkills ? renderSubSkills(skillKey, skill.subSkills) : renderBuildingBlocks(skillKey, skill.buildingBlocks)}
-                </div>
-            `;
-            
-            return card;
-        }
-
-        // Render sub-skills (like languages)
-        function renderSubSkills(parentSkillKey, subSkills) {
-            let html = '';
-            Object.keys(subSkills).forEach(subSkillKey => {
-                const subSkill = subSkills[subSkillKey];
-                const progress = calculateSubSkillProgress(currentCategory, parentSkillKey, subSkillKey);
+            for (let skillKey in skillData[categoryKey].skills) {
+                const skill = skillData[categoryKey].skills[skillKey];
+                const progress = userProgress[categoryKey].skills[skillKey];
                 
-                html += `
-                    <div class="skill-card" style="margin: 10px 0; background: white;">
-                        <div class="skill-header">
-                            <div class="skill-title">${subSkill.title}</div>
-                            <button class="expand-btn" onclick="toggleSubSkill('${parentSkillKey}', '${subSkillKey}')">+</button>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${progress}%"></div>
-                        </div>
-                        <div class="progress-text">${progress}% Complete</div>
-                        <div class="skill-dropdown" id="subdropdown-${parentSkillKey}-${subSkillKey}">
-                            ${renderBuildingBlocks(`${parentSkillKey}-${subSkillKey}`, subSkill.buildingBlocks)}
-                        </div>
+                const card = document.createElement('div');
+                card.className = 'skill-card';
+                
+                const expPercent = (progress.exp % 100);
+                const expToNext = expToNextLevel(progress.exp);
+                
+                card.innerHTML = `
+                    <div class="skill-header" onclick="toggleSkillExpansion('${skillKey}')">
+                        <div class="skill-title">${skill.name}</div>
+                        <div class="skill-level">Level ${progress.level}</div>
+                        <div class="expand-icon" id="expand-${skillKey}">▼</div>
+                    </div>
+                    <div class="skill-exp">${progress.exp} EXP (${expToNext} to next level)</div>
+                    <div class="exp-bar">
+                        <div class="exp-fill" style="width: ${expPercent}%"></div>
+                    </div>
+                    <div class="sub-skills" id="subskills-${skillKey}">
+                        ${skill.subSkills.map((subSkill, index) => `
+                            <div class="sub-skill">
+                                <input type="checkbox" 
+                                       id="sub-${skillKey}-${index}" 
+                                       ${subSkill.completed ? 'checked disabled' : ''}
+                                       onchange="toggleSubSkill('${categoryKey}', '${skillKey}', ${index})">
+                                <label for="sub-${skillKey}-${index}">${subSkill.name}</label>
+                                <div class="sub-skill-exp">+${subSkill.exp} EXP</div>
+                            </div>
+                        `).join('')}
                     </div>
                 `;
-            });
-            return html;
-        }
-
-        // Render building blocks (checkboxes)
-        function renderBuildingBlocks(skillKey, buildingBlocks) {
-            if (!buildingBlocks) return '';
-            
-            let html = '';
-            buildingBlocks.forEach((block, index) => {
-                const blockKey = `${currentCategory}-${skillKey}-${index}`;
-                const isChecked = skillProgress[blockKey] || false;
                 
-                html += `
-                    <div class="building-block">
-                        <input type="checkbox" id="${blockKey}" ${isChecked ? 'checked' : ''} 
-                               onchange="updateProgress('${blockKey}')">
-                        <label for="${blockKey}">${block}</label>
-                    </div>
-                `;
-            });
-            return html;
-        }
-
-        // Toggle skill dropdown
-        function toggleSkill(skillKey) {
-            const dropdown = document.getElementById(`dropdown-${skillKey}`);
-            const button = dropdown.previousElementSibling.previousElementSibling.querySelector('.expand-btn');
-            
-            dropdown.classList.toggle('expanded');
-            button.classList.toggle('expanded');
-        }
-
-        // Toggle sub-skill dropdown
-        function toggleSubSkill(parentSkillKey, subSkillKey) {
-            const dropdown = document.getElementById(`subdropdown-${parentSkillKey}-${subSkillKey}`);
-            const button = dropdown.previousElementSibling.previousElementSibling.querySelector('.expand-btn');
-            
-            dropdown.classList.toggle('expanded');
-            button.classList.toggle('expanded');
-        }
-
-        // Update progress when checkbox is clicked
-        function updateProgress(blockKey) {
-            const checkbox = document.getElementById(blockKey);
-            skillProgress[blockKey] = checkbox.checked;
-            localStorage.setItem('skillProgress', JSON.stringify(skillProgress));
-            
-            updateAllProgress();
-        }
-
-        // Calculate category progress
-        function calculateCategoryProgress(categoryKey) {
-            const category = skillTreeData[categoryKey];
-            let totalBlocks = 0;
-            let completedBlocks = 0;
-            
-            Object.keys(category.skills).forEach(skillKey => {
-                const skill = category.skills[skillKey];
-                if (skill.subSkills) {
-                    Object.keys(skill.subSkills).forEach(subSkillKey => {
-                        const subSkill = skill.subSkills[subSkillKey];
-                        totalBlocks += subSkill.buildingBlocks.length;
-                        subSkill.buildingBlocks.forEach((_, index) => {
-                            const blockKey = `${categoryKey}-${skillKey}-${subSkillKey}-${index}`;
-                            if (skillProgress[blockKey]) completedBlocks++;
-                        });
-                    });
-                } else if (skill.buildingBlocks) {
-                    totalBlocks += skill.buildingBlocks.length;
-                    skill.buildingBlocks.forEach((_, index) => {
-                        const blockKey = `${categoryKey}-${skillKey}-${index}`;
-                        if (skillProgress[blockKey]) completedBlocks++;
-                    });
-                }
-            });
-            
-            return totalBlocks === 0 ? 0 : Math.round((completedBlocks / totalBlocks) * 100);
-        }
-
-        // Calculate skill progress
-        function calculateSkillProgress(categoryKey, skillKey) {
-            const skill = skillTreeData[categoryKey].skills[skillKey];
-            let totalBlocks = 0;
-            let completedBlocks = 0;
-            
-            if (skill.subSkills) {
-                Object.keys(skill.subSkills).forEach(subSkillKey => {
-                    const subSkill = skill.subSkills[subSkillKey];
-                    totalBlocks += subSkill.buildingBlocks.length;
-                    subSkill.buildingBlocks.forEach((_, index) => {
-                        const blockKey = `${categoryKey}-${skillKey}-${subSkillKey}-${index}`;
-                        if (skillProgress[blockKey]) completedBlocks++;
-                    });
-                });
-            } else if (skill.buildingBlocks) {
-                totalBlocks = skill.buildingBlocks.length;
-                skill.buildingBlocks.forEach((_, index) => {
-                    const blockKey = `${categoryKey}-${skillKey}-${index}`;
-                    if (skillProgress[blockKey]) completedBlocks++;
-                });
-            }
-            
-            return totalBlocks === 0 ? 0 : Math.round((completedBlocks / totalBlocks) * 100);
-        }
-
-        // Calculate sub-skill progress
-        function calculateSubSkillProgress(categoryKey, skillKey, subSkillKey) {
-            const subSkill = skillTreeData[categoryKey].skills[skillKey].subSkills[subSkillKey];
-            let completedBlocks = 0;
-            
-            subSkill.buildingBlocks.forEach((_, index) => {
-                const blockKey = `${categoryKey}-${skillKey}-${subSkillKey}-${index}`;
-                if (skillProgress[blockKey]) completedBlocks++;
-            });
-            
-            return Math.round((completedBlocks / subSkill.buildingBlocks.length) * 100);
-        }
-
-        // Update all progress bars
-        function updateAllProgress() {
-            if (currentView === 'categories') {
-                renderCategories();
-            } else if (currentView === 'skills' && currentCategory) {
-                const category = skillTreeData[currentCategory];
-                renderSkills(category.skills);
+                container.appendChild(card);
             }
         }
 
-        // Go back to categories
-        function goBack() {
-            currentView = 'categories';
-            currentCategory = null;
+        // Toggle skill expansion
+        function toggleSkillExpansion(skillKey) {
+            const subSkills = document.getElementById(`subskills-${skillKey}`);
+            const icon = document.getElementById(`expand-${skillKey}`);
             
-            document.getElementById('page-title').textContent = 'Skill Tree';
-            document.getElementById('page-subtitle').textContent = 'Choose a category to develop your abilities';
-            document.getElementById('skills-view').classList.add('hidden');
-            document.getElementById('categories-view').classList.remove('hidden');
-            document.querySelector('.back-btn').classList.add('hidden');
-            
-            renderCategories();
+            subSkills.classList.toggle('expanded');
+            icon.classList.toggle('rotated');
         }
 
-        // Initialize the app
-        init();
+        // Initialize the application
+        initializeProgress();
+        updateCategoriesDisplay();
     </script>
 </body>
 </html>
