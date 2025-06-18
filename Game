@@ -314,6 +314,18 @@
                     {name: 'Life Organization', icon: '📋', description: 'Organize all areas of life'}
                 ]
             }
+        },
+            'Life Skills': {
+                icon: '🏡',
+                skills: [
+                    {name: 'Cooking Basics', icon: '👨‍🍳', description: 'Master 10 basic recipes'},
+                    {name: 'Home Repair', icon: '🔧', description: 'Learn basic home maintenance'},
+                    {name: 'Time Management', icon: '⏰', description: 'Master productivity system'},
+                    {name: 'Public Speaking', icon: '🎤', description: 'Give a confident public presentation'},
+                    {name: 'First Aid', icon: '🚑', description: 'Get certified in first aid/CPR'},
+                    {name: 'Life Organization', icon: '📋', description: 'Organize all areas of life'}
+                ]
+            }
         };
 
         let skillStates = {};
