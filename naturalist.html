@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naturalist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .category-stats {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .category-level {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .category-exp {
+            font-size: 1.2em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .skill-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #4a5568;
+        }
+
+        .skill-level {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .skill-exp {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .exp-bar {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .exp-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .sub-skills {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .sub-skills.expanded {
+            display: block;
+        }
+
+        .sub-skill {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: #f7fafc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sub-skill:hover {
+            background: #edf2f7;
+        }
+
+        .sub-skill input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .sub-skill label {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .sub-skill-exp {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalPop 0.5s ease;
+        }
+
+        @keyframes modalPop {
+            from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .modal h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .expand-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Main.html">Home</a>/li>
+            <ul>
+        <nav>
+        
+        </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🌱 Naturalist</h1>
+            <p>Connect with nature and understand living systems</p>
+        </div>
+        
+        <div class="category-stats">
+            <div class="category-level" id="categoryLevel">Level 0</div>
+            <div class="category-exp" id="categoryExp">0 EXP</div>
+        </div>
+        
+        <div class="skills-grid" id="skillsGrid">
+            <!-- Skills will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Level Up Modal -->
+    <div id="levelUpModal" class="modal">
+        <div class="modal-content">
+            <h2>🎉 Congratulations!</h2>
+            <p id="levelUpText"></p>
+            <button onclick="closeLevelUpModal()">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        // Verbal-Linguistic skills data
+        const skillData = {
+            'reading': {
+                name: 'Reading',
+                subSkills: [
+                    { name: 'Read 10 books', exp: 50, completed: false },
+                    { name: 'Read 25 books', exp: 75, completed: false },
+                    { name: 'Read 50 books', exp: 100, completed: false },
+                    { name: 'Read a classic novel', exp: 60, completed: false },
+                    { name: 'Read non-fiction', exp: 40, completed: false }
+                ]
+            },
+            'writing': {
+                name: 'Writing',
+                subSkills: [
+                    { name: 'Write daily journal', exp: 30, completed: false },
+                    { name: 'Write a short story', exp: 80, completed: false },
+                    { name: 'Write a poem', exp: 40, completed: false },
+                    { name: 'Write an essay', exp: 60, completed: false },
+                    { name: 'Start a blog', exp: 70, completed: false }
+                ]
+            }
+        };
+
+        // Progress tracking
+        let userProgress = {
+            totalExp: 0,
+            level: 0,
+            skills: {}
+        };
+
+        // Initialize progress tracking
+        function initializeProgress() {
+            for (let skillKey in skillData) {
+                userProgress.skills[skillKey] = {
+                    exp: 0,
+                    level: 0,
+                    completedSubSkills: []
+                };
+            }
+        }
+
+        // Calculate level based on experience
+        function calculateLevel(exp) {
+            return Math.floor(exp / 100);
+        }
+
+        // Calculate experience needed for next level
+        function expToNextLevel(exp) {
+            const currentLevel = calculateLevel(exp);
+            const nextLevelExp = (currentLevel + 1) * 100;
+            return nextLevelExp - exp;
+        }
+
+        // Show level up modal
+        function showLevelUpModal(skillName, newLevel, isCategory = false) {
+            const modal = document.getElementById('levelUpModal');
+            const text = document.getElementById('levelUpText');
+            
+            if (isCategory) {
+                text.textContent = `Verbal-Linguistic category reached level ${newLevel}!`;
+            } else {
+                text.textContent = `${skillName} skill reached level ${newLevel}!`;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        // Close level up modal
+        function closeLevelUpModal() {
+            document.getElementById('levelUpModal').style.display = 'none';
+        }
+
+        // Handle sub-skill completion
+        function toggleSubSkill(skillKey, subSkillIndex) {
+            const skill = skillData[skillKey];
+            const subSkill = skill.subSkills[subSkillIndex];
+            
+            if (subSkill.completed) {
+                return; // Already completed
+            }
+
+            // Mark as completed
+            subSkill.completed = true;
+            
+            // Add experience
+            const oldSkillLevel = userProgress.skills[skillKey].level;
+            const oldCategoryLevel = userProgress.level;
+            
+            userProgress.skills[skillKey].exp += subSkill.exp;
+            userProgress.totalExp += subSkill.exp;
+            userProgress.skills[skillKey].completedSubSkills.push(subSkillIndex);
+            
+            // Update levels
+            const newSkillLevel = calculateLevel(userProgress.skills[skillKey].exp);
+            const newCategoryLevel = calculateLevel(userProgress.totalExp);
+            
+            userProgress.skills[skillKey].level = newSkillLevel;
+            userProgress.level = newCategoryLevel;
+            
+            // Show level up modals
+            if (newSkillLevel > oldSkillLevel) {
+                setTimeout(() => showLevelUpModal(skill.name, newSkillLevel), 100);
+            }
+            
+            if (newCategoryLevel > oldCategoryLevel) {
+                setTimeout(() => showLevelUpModal(skill.name, newCategoryLevel, true), 500);
+            }
+            
+            // Update UI
+            updateSkillsDisplay();
+            updateCategoryStats();
+        }
+
+        // Update category stats
+        function updateCategoryStats() {
+            document.getElementById('categoryLevel').textContent = `Level ${userProgress.level}`;
+            document.getElementById('categoryExp').textContent = `${userProgress.totalExp} EXP`;
+        }
+
+        // Update skills display
+        function updateSkillsDisplay() {
+            const container = document.getElementById('skillsGrid');
+            container.innerHTML = '';
+
+            for (let skillKey in skillData) {
+                const skill = skillData[skillKey];
+                const progress = userProgress.skills[skillKey];
+                
+                const card = document.createElement('div');
+                card.className = 'skill-card';
+                
+                const expPercent = (progress.exp % 100);
+                const expToNext = expToNextLevel(progress.exp);
+                
+                card.innerHTML = `
+                    <div class="skill-header" onclick="toggleSkillExpansion('${skillKey}')">
+                        <div class="skill-title">${skill.name}</div>
+                        <div style="display: flex; align-items: center;">
+                            <div class="skill-level">Level ${progress.level}</div>
+                            <div class="expand-icon" id="expand-${skillKey}">▼</div>
+                        </div>
+                    </div>
+                    <div class="skill-exp">${progress.exp} EXP (${expToNext} to next level)</div>
+                    <div class="exp-bar">
+                        <div class="exp-fill" style="width: ${expPercent}%"></div>
+                    </div>
+                    <div class="sub-skills" id="subskills-${skillKey}">
+                        ${skill.subSkills.map((subSkill, index) => `
+                            <div class="sub-skill">
+                                <input type="checkbox" 
+                                       id="sub-${skillKey}-${index}" 
+                                       ${subSkill.completed ? 'checked disabled' : ''}
+                                       onchange="toggleSubSkill('${skillKey}', ${index})">
+                                <label for="sub-${skillKey}-${index}">${subSkill.name}</label>
+                                <div class="sub-skill-exp">+${subSkill.exp} EXP</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            }
+        }
+
+        // Toggle skill expansion
+        function toggleSkillExpansion(skillKey) {
+            const subSkills = document.getElementById(`subskills-${skillKey}`);
+            const icon = document.getElementById(`expand-${skillKey}`);
+            
+            subSkills.classList.toggle('expanded');
+            icon.classList.toggle('rotated');
+        }
+
+        // Initialize the application
+        initializeProgress();
+        updateSkillsDisplay();
+        updateCategoryStats();
+    </script>
+</body>
+</html>
