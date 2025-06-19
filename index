@@ -348,14 +348,15 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Navigation Dropdown -->
-        <div class="nav-dropdown">
-            <select class="dropdown-select" id="pageSelector" onchange="navigateToPage()">
-                <option value="home">🏠 Home</option>
-                <option value="verbal-linguistic">📚 Verbal-Linguistic</option>
-                <option value="mathematical-logical">🔢 Mathematical-Logical</option>
-            </select>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a>/li>
+                <li><a href="locations.html">locations</a>/li>
+                <li><a href="index.html">contact</a>/li>
+            <ul>
+        <nav>
+        
         </div>
 
         <!-- Home Page -->
