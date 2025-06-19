@@ -359,18 +359,6 @@
         
         </div>
 
-        <!-- Home Page -->
-        <div id="home-page" class="page active">
-            <div class="header">
-                <h1>🌟 Skill Tree</h1>
-                <p>Develop your abilities and track your progress</p>
-            </div>
-            
-            <div class="categories" id="categories">
-                <!-- Categories will be populated by JavaScript -->
-            </div>
-        </div>
-
         <!-- Verbal-Linguistic Page -->
         <div id="verbal-linguistic-page" class="page">
             <div class="header">
