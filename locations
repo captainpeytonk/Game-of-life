@@ -528,26 +528,6 @@
                             { name: 'Work with decimals', exp: 35, completed: false }
                         ]
                     },
-                    'geometry': {
-                        name: 'Geometry',
-                        subSkills: [
-                            { name: 'Identify basic shapes', exp: 20, completed: false },
-                            { name: 'Calculate area and perimeter', exp: 40, completed: false },
-                            { name: 'Understand angles', exp: 45, completed: false },
-                            { name: 'Work with triangles', exp: 60, completed: false },
-                            { name: 'Master Pythagorean theorem', exp: 70, completed: false }
-                        ]
-                    },
-                    'statistics': {
-                        name: 'Statistics',
-                        subSkills: [
-                            { name: 'Calculate mean and median', exp: 30, completed: false },
-                            { name: 'Understand probability', exp: 50, completed: false },
-                            { name: 'Create graphs and charts', exp: 45, completed: false },
-                            { name: 'Analyze data trends', exp: 70, completed: false },
-                            { name: 'Conduct statistical test', exp: 90, completed: false }
-                        ]
-                    },
                     'programming': {
                         name: 'Programming',
                         subSkills: [
