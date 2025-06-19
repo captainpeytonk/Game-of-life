@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skill Tree</title>
+    <title>Verbal-Linguistic Skills</title>
     <style>
         * {
             margin: 0;
@@ -16,19 +16,18 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
+            padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
 
         .header {
             text-align: center;
             margin-bottom: 40px;
             color: white;
-            position: relative;
         }
 
         .header h1 {
@@ -37,94 +36,24 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .nav-dropdown {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-
-        .dropdown-select {
+        .category-stats {
             background: rgba(255,255,255,0.2);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            min-width: 200px;
-        }
-
-        .dropdown-select:hover {
-            background: rgba(255,255,255,0.3);
-        }
-
-        .dropdown-select option {
-            background: #667eea;
-            color: white;
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
-        .category-card {
-            background: rgba(255,255,255,0.95);
             border-radius: 20px;
-            padding: 30px;
+            padding: 20px;
+            margin-bottom: 30px;
             text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .category-card h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-            color: #4a5568;
+            color: white;
         }
 
         .category-level {
-            font-size: 1.5em;
+            font-size: 2em;
             font-weight: bold;
-            color: #667eea;
             margin-bottom: 10px;
         }
 
         .category-exp {
-            color: #666;
-            font-size: 1.1em;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
+            font-size: 1.2em;
         }
 
         .skills-grid {
@@ -293,90 +222,22 @@
         .expand-icon.rotated {
             transform: rotate(180deg);
         }
-
-        .category-page-header {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-            color: white;
-        }
-
-        .category-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 15px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #ffd700;
-        }
-
-        .stat-label {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        @media (max-width: 768px) {
-            .nav-dropdown {
-                position: static;
-                text-align: center;
-                margin-bottom: 20px;
-            }
-
-            .category-stats {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a>/li>
-                <li><a href="locations.html">locations</a>/li>
-                <li><a href="contact.html">contact</a>/li>
-            <ul>
-        <nav>
-        
+    <div class="container">
+        <div class="header">
+            <h1>📚 Verbal-Linguistic Skills</h1>
+            <p>Develop your language and communication abilities</p>
         </div>
-
-        <!-- Mathematical-Logical Page -->
-        <div id="mathematical-logical-page" class="page">
-            <div class="header">
-                <h1>🔢 Mathematical-Logical Skills</h1>
-                <div class="category-page-header">
-                    <h2>Master Logic and Problem Solving</h2>
-                    <div class="category-stats">
-                        <div class="stat-item">
-                            <div class="stat-number" id="math-level">0</div>
-                            <div class="stat-label">Level</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="math-exp">0</div>
-                            <div class="stat-label">Total EXP</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="math-skills-completed">0</div>
-                            <div class="stat-label">Skills Mastered</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="skills-grid" id="math-skills-grid">
-                <!-- Skills will be populated by JavaScript -->
-            </div>
+        
+        <div class="category-stats">
+            <div class="category-level" id="categoryLevel">Level 0</div>
+            <div class="category-exp" id="categoryExp">0 EXP</div>
+        </div>
+        
+        <div class="skills-grid" id="skillsGrid">
+            <!-- Skills will be populated by JavaScript -->
         </div>
     </div>
 
@@ -390,104 +251,97 @@
     </div>
 
     <script>
-        // Data structure for skills and categories
+        // Verbal-Linguistic skills data
         const skillData = {
-            'mathematical-logical': {
-                name: 'Mathematical-Logical',
-                skills: {
-                    'basic-math': {
-                        name: 'Basic Mathematics',
-                        subSkills: [
-                            { name: 'Master multiplication tables', exp: 30, completed: false },
-                            { name: 'Solve algebraic equations', exp: 50, completed: false },
-                            { name: 'Understand fractions', exp: 40, completed: false },
-                            { name: 'Calculate percentages', exp: 35, completed: false },
-                            { name: 'Work with decimals', exp: 35, completed: false }
-                        ]
-                    },
-                    'geometry': {
-                        name: 'Geometry',
-                        subSkills: [
-                            { name: 'Identify basic shapes', exp: 20, completed: false },
-                            { name: 'Calculate area and perimeter', exp: 40, completed: false },
-                            { name: 'Understand angles', exp: 45, completed: false },
-                            { name: 'Work with triangles', exp: 60, completed: false },
-                            { name: 'Master Pythagorean theorem', exp: 70, completed: false }
-                        ]
-                    },
-                    'statistics': {
-                        name: 'Statistics',
-                        subSkills: [
-                            { name: 'Calculate mean and median', exp: 30, completed: false },
-                            { name: 'Understand probability', exp: 50, completed: false },
-                            { name: 'Create graphs and charts', exp: 45, completed: false },
-                            { name: 'Analyze data trends', exp: 70, completed: false },
-                            { name: 'Conduct statistical test', exp: 90, completed: false }
-                        ]
-                    },
-                    'programming': {
-                        name: 'Programming',
-                        subSkills: [
-                            { name: 'Learn programming basics', exp: 40, completed: false },
-                            { name: 'Write first program', exp: 60, completed: false },
-                            { name: 'Understand loops and conditions', exp: 80, completed: false },
-                            { name: 'Build a simple app', exp: 120, completed: false },
-                            { name: 'Learn data structures', exp: 100, completed: false }
-                        ]
-                    },
-                    'logic-puzzles': {
-                        name: 'Logic Puzzles',
-                        subSkills: [
-                            { name: 'Solve sudoku puzzle', exp: 25, completed: false },
-                            { name: 'Complete logic grid', exp: 40, completed: false },
-                            { name: 'Master chess basics', exp: 70, completed: false },
-                            { name: 'Solve riddles daily', exp: 30, completed: false },
-                            { name: 'Complete escape room', exp: 80, completed: false }
-                        ]
-                    },
-                    'financial-math': {
-                        name: 'Financial Mathematics',
-                        subSkills: [
-                            { name: 'Calculate compound interest', exp: 40, completed: false },
-                            { name: 'Understand loan payments', exp: 50, completed: false },
-                            { name: 'Budget monthly expenses', exp: 35, completed: false },
-                            { name: 'Learn investment basics', exp: 70, completed: false },
-                            { name: 'File tax returns', exp: 60, completed: false }
-                        ]
-                    }
-                }
+            'reading': {
+                name: 'Reading',
+                subSkills: [
+                    { name: 'Read 10 books', exp: 50, completed: false },
+                    { name: 'Read 25 books', exp: 75, completed: false },
+                    { name: 'Read 50 books', exp: 100, completed: false },
+                    { name: 'Read a classic novel', exp: 60, completed: false },
+                    { name: 'Read non-fiction', exp: 40, completed: false }
+                ]
+            },
+            'writing': {
+                name: 'Writing',
+                subSkills: [
+                    { name: 'Write daily journal', exp: 30, completed: false },
+                    { name: 'Write a short story', exp: 80, completed: false },
+                    { name: 'Write a poem', exp: 40, completed: false },
+                    { name: 'Write an essay', exp: 60, completed: false },
+                    { name: 'Start a blog', exp: 70, completed: false }
+                ]
+            },
+            'learn-language': {
+                name: 'Learn a New Language',
+                subSkills: [
+                    { name: 'Choose target language', exp: 10, completed: false },
+                    { name: 'Learn basic greetings', exp: 20, completed: false },
+                    { name: 'Master 100 words', exp: 50, completed: false },
+                    { name: 'Hold basic conversation', exp: 100, completed: false },
+                    { name: 'Watch movie in target language', exp: 80, completed: false }
+                ]
+            },
+            'japanese': {
+                name: 'Japanese',
+                subSkills: [
+                    { name: 'Learn Hiragana', exp: 10, completed: false },
+                    { name: 'Learn Katakana', exp: 15, completed: false },
+                    { name: 'Learn 10 Kanji', exp: 20, completed: false },
+                    { name: 'Learn 50 Kanji', exp: 40, completed: false },
+                    { name: 'Learn 100 Kanji', exp: 60, completed: false },
+                    { name: 'Read a story in Japanese', exp: 80, completed: false },
+                    { name: 'Read a news article', exp: 100, completed: false }
+                ]
+            },
+            'storytelling': {
+                name: 'Story Telling',
+                subSkills: [
+                    { name: 'Tell a personal story', exp: 30, completed: false },
+                    { name: 'Create fictional character', exp: 40, completed: false },
+                    { name: 'Practice voice modulation', exp: 50, completed: false },
+                    { name: 'Tell story to children', exp: 60, completed: false },
+                    { name: 'Record storytelling video', exp: 80, completed: false }
+                ]
+            },
+            'teaching': {
+                name: 'Teaching',
+                subSkills: [
+                    { name: 'Explain concept to friend', exp: 30, completed: false },
+                    { name: 'Create lesson plan', exp: 50, completed: false },
+                    { name: 'Teach online tutorial', exp: 70, completed: false },
+                    { name: 'Mentor someone', exp: 90, completed: false },
+                    { name: 'Get teaching certification', exp: 120, completed: false }
+                ]
+            },
+            'acting': {
+                name: 'Acting',
+                subSkills: [
+                    { name: 'Practice basic expressions', exp: 25, completed: false },
+                    { name: 'Memorize monologue', exp: 50, completed: false },
+                    { name: 'Join acting class', exp: 70, completed: false },
+                    { name: 'Perform in local theater', exp: 100, completed: false },
+                    { name: 'Create character backstory', exp: 60, completed: false }
+                ]
             }
         };
 
-        // Progress tracking - persists across pages
-        let userProgress = {};
-
-        // Current page
-        let currentPage = 'home';
+        // Progress tracking
+        let userProgress = {
+            totalExp: 0,
+            level: 0,
+            skills: {}
+        };
 
         // Initialize progress tracking
         function initializeProgress() {
-            // Try to load from memory first
-            const savedProgress = JSON.parse(JSON.stringify(userProgress));
-            
-            for (let categoryKey in skillData) {
-                if (!userProgress[categoryKey]) {
-                    userProgress[categoryKey] = {
-                        totalExp: 0,
-                        level: 0,
-                        skills: {}
-                    };
-                }
-
-                for (let skillKey in skillData[categoryKey].skills) {
-                    if (!userProgress[categoryKey].skills[skillKey]) {
-                        userProgress[categoryKey].skills[skillKey] = {
-                            exp: 0,
-                            level: 0,
-                            completedSubSkills: []
-                        };
-                    }
-                }
+            for (let skillKey in skillData) {
+                userProgress.skills[skillKey] = {
+                    exp: 0,
+                    level: 0,
+                    completedSubSkills: []
+                };
             }
         }
 
@@ -504,12 +358,12 @@
         }
 
         // Show level up modal
-        function showLevelUpModal(skillName, newLevel, categoryName = null) {
+        function showLevelUpModal(skillName, newLevel, isCategory = false) {
             const modal = document.getElementById('levelUpModal');
             const text = document.getElementById('levelUpText');
             
-            if (categoryName) {
-                text.textContent = `${categoryName} category reached level ${newLevel}!`;
+            if (isCategory) {
+                text.textContent = `Verbal-Linguistic category reached level ${newLevel}!`;
             } else {
                 text.textContent = `${skillName} skill reached level ${newLevel}!`;
             }
@@ -523,8 +377,8 @@
         }
 
         // Handle sub-skill completion
-        function toggleSubSkill(categoryKey, skillKey, subSkillIndex) {
-            const skill = skillData[categoryKey].skills[skillKey];
+        function toggleSubSkill(skillKey, subSkillIndex) {
+            const skill = skillData[skillKey];
             const subSkill = skill.subSkills[subSkillIndex];
             
             if (subSkill.completed) {
@@ -535,19 +389,19 @@
             subSkill.completed = true;
             
             // Add experience
-            const oldSkillLevel = userProgress[categoryKey].skills[skillKey].level;
-            const oldCategoryLevel = userProgress[categoryKey].level;
+            const oldSkillLevel = userProgress.skills[skillKey].level;
+            const oldCategoryLevel = userProgress.level;
             
-            userProgress[categoryKey].skills[skillKey].exp += subSkill.exp;
-            userProgress[categoryKey].totalExp += subSkill.exp;
-            userProgress[categoryKey].skills[skillKey].completedSubSkills.push(subSkillIndex);
+            userProgress.skills[skillKey].exp += subSkill.exp;
+            userProgress.totalExp += subSkill.exp;
+            userProgress.skills[skillKey].completedSubSkills.push(subSkillIndex);
             
             // Update levels
-            const newSkillLevel = calculateLevel(userProgress[categoryKey].skills[skillKey].exp);
-            const newCategoryLevel = calculateLevel(userProgress[categoryKey].totalExp);
+            const newSkillLevel = calculateLevel(userProgress.skills[skillKey].exp);
+            const newCategoryLevel = calculateLevel(userProgress.totalExp);
             
-            userProgress[categoryKey].skills[skillKey].level = newSkillLevel;
-            userProgress[categoryKey].level = newCategoryLevel;
+            userProgress.skills[skillKey].level = newSkillLevel;
+            userProgress.level = newCategoryLevel;
             
             // Show level up modals
             if (newSkillLevel > oldSkillLevel) {
@@ -555,27 +409,59 @@
             }
             
             if (newCategoryLevel > oldCategoryLevel) {
-                setTimeout(() => showLevelUpModal(skill.name, newCategoryLevel, skillData[categoryKey].name), 500);
+                setTimeout(() => showLevelUpModal(skill.name, newCategoryLevel, true), 500);
             }
             
-            // Update all displays
-            updateAllDisplays();
+            // Update UI
+            updateSkillsDisplay();
+            updateCategoryStats();
         }
-            
+
+        // Update category stats
+        function updateCategoryStats() {
+            document.getElementById('categoryLevel').textContent = `Level ${userProgress.level}`;
+            document.getElementById('categoryExp').textContent = `${userProgress.totalExp} EXP`;
+        }
+
+        // Update skills display
+        function updateSkillsDisplay() {
+            const container = document.getElementById('skillsGrid');
             container.innerHTML = '';
 
-            for (let categoryKey in skillData) {
-                const category = skillData[categoryKey];
-                const progress = userProgress[categoryKey];
+            for (let skillKey in skillData) {
+                const skill = skillData[skillKey];
+                const progress = userProgress.skills[skillKey];
                 
                 const card = document.createElement('div');
-                card.className = 'category-card';
-                card.onclick = () => showPage(categoryKey);
+                card.className = 'skill-card';
+                
+                const expPercent = (progress.exp % 100);
+                const expToNext = expToNextLevel(progress.exp);
                 
                 card.innerHTML = `
-                    <h2>${category.name}</h2>
-                    <div class="category-level">Level ${progress.level}</div>
-                    <div class="category-exp">${progress.totalExp} EXP</div>
+                    <div class="skill-header" onclick="toggleSkillExpansion('${skillKey}')">
+                        <div class="skill-title">${skill.name}</div>
+                        <div style="display: flex; align-items: center;">
+                            <div class="skill-level">Level ${progress.level}</div>
+                            <div class="expand-icon" id="expand-${skillKey}">▼</div>
+                        </div>
+                    </div>
+                    <div class="skill-exp">${progress.exp} EXP (${expToNext} to next level)</div>
+                    <div class="exp-bar">
+                        <div class="exp-fill" style="width: ${expPercent}%"></div>
+                    </div>
+                    <div class="sub-skills" id="subskills-${skillKey}">
+                        ${skill.subSkills.map((subSkill, index) => `
+                            <div class="sub-skill">
+                                <input type="checkbox" 
+                                       id="sub-${skillKey}-${index}" 
+                                       ${subSkill.completed ? 'checked disabled' : ''}
+                                       onchange="toggleSubSkill('${skillKey}', ${index})">
+                                <label for="sub-${skillKey}-${index}">${subSkill.name}</label>
+                                <div class="sub-skill-exp">+${subSkill.exp} EXP</div>
+                            </div>
+                        `).join('')}
+                    </div>
                 `;
                 
                 container.appendChild(card);
@@ -583,19 +469,18 @@
         }
 
         // Toggle skill expansion
-        function toggleSkillExpansion(skillId) {
-            const subSkills = document.getElementById(`subskills-${skillId}`);
-            const icon = document.getElementById(`expand-${skillId}`);
+        function toggleSkillExpansion(skillKey) {
+            const subSkills = document.getElementById(`subskills-${skillKey}`);
+            const icon = document.getElementById(`expand-${skillKey}`);
             
-            if (subSkills && icon) {
-                subSkills.classList.toggle('expanded');
-                icon.classList.toggle('rotated');
-            }
+            subSkills.classList.toggle('expanded');
+            icon.classList.toggle('rotated');
         }
 
         // Initialize the application
         initializeProgress();
-        updateAllDisplays();
+        updateSkillsDisplay();
+        updateCategoryStats();
     </script>
 </body>
 </html>
