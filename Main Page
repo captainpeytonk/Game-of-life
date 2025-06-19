@@ -270,186 +270,370 @@
 </head>
 <body>
     <div class="container">
-        <!-- Main Categories Page -->
-        <div id="main-page">
-            <div class="header">
-                <h1>🌟 Skill Tree</h1>
-                <p>Develop your abilities and track your progress</p>
-            </div>
-            
-            <div class="categories" id="categories">
-                <!-- Categories will be populated by JavaScript -->
-            </div>
+        <button class="back-btn hidden" onclick="goBack()">← Back</button>
+        
+        <div class="header">
+            <h1 id="page-title">Skill Tree</h1>
+            <p id="page-subtitle">Choose a category to develop your abilities</p>
         </div>
 
-        <!-- Skills Page -->
-        <div id="skills-page" class="skills-page">
-            <button class="back-btn" onclick="showMainPage()">← Back to Categories</button>
-            <div class="header">
-                <h1 id="category-title"></h1>
-            </div>
+        <!-- Main Categories View -->
+        <div id="categories-view" class="categories-grid fade-in">
+            <!-- Categories will be populated by JavaScript -->
+        </div>
+
+        <!-- Skills View -->
+        <div id="skills-view" class="skills-container hidden">
             <div class="skills-grid" id="skills-grid">
                 <!-- Skills will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
-    <!-- Level Up Modal -->
-    <div id="levelUpModal" class="modal">
-        <div class="modal-content">
-            <h2>🎉 Congratulations!</h2>
-            <p id="levelUpText"></p>
-            <button onclick="closeLevelUpModal()">Continue</button>
-        </div>
-    </div>
-
     <script>
-        // Data structure for skills and categories
-        const skillData = {
+        // Skill tree data structure
+        const skillTreeData = {
             'verbal-linguistic': {
-                name: 'Verbal-Linguistic',
+                title: 'Verbal-Linguistic',
+                icon: '📚',
+                description: 'Master the art of words, language, and communication',
                 skills: {
                     'reading': {
-                        name: 'Reading',
-                        subSkills: [
-                            { name: 'Read 10 books', exp: 50, completed: false },
-                            { name: 'Read 25 books', exp: 75, completed: false },
-                            { name: 'Read 50 books', exp: 100, completed: false },
-                            { name: 'Read a classic novel', exp: 60, completed: false },
-                            { name: 'Read non-fiction', exp: 40, completed: false }
+                        title: 'Reading',
+                        buildingBlocks: [
+                            'Read 10 books this year',
+                            'Read a classic novel',
+                            'Read non-fiction book',
+                            'Read poetry collection',
+                            'Speed reading techniques'
                         ]
                     },
                     'writing': {
-                        name: 'Writing',
-                        subSkills: [
-                            { name: 'Write daily journal', exp: 30, completed: false },
-                            { name: 'Write a short story', exp: 80, completed: false },
-                            { name: 'Write a poem', exp: 40, completed: false },
-                            { name: 'Write an essay', exp: 60, completed: false },
-                            { name: 'Start a blog', exp: 70, completed: false }
+                        title: 'Writing',
+                        buildingBlocks: [
+                            'Write daily journal',
+                            'Complete a short story',
+                            'Write a blog post',
+                            'Learn essay structure',
+                            'Creative writing exercises'
                         ]
                     },
-                    'learn-language': {
-                        name: 'Learn a New Language',
-                        subSkills: [
-                            { name: 'Choose target language', exp: 10, completed: false },
-                            { name: 'Learn basic greetings', exp: 20, completed: false },
-                            { name: 'Master 100 words', exp: 50, completed: false },
-                            { name: 'Hold basic conversation', exp: 100, completed: false },
-                            { name: 'Watch movie in target language', exp: 80, completed: false }
-                        ]
-                    },
-                    'japanese': {
-                        name: 'Japanese',
-                        subSkills: [
-                            { name: 'Learn Hiragana', exp: 10, completed: false },
-                            { name: 'Learn Katakana', exp: 15, completed: false },
-                            { name: 'Learn 10 Kanji', exp: 20, completed: false },
-                            { name: 'Learn 50 Kanji', exp: 40, completed: false },
-                            { name: 'Learn 100 Kanji', exp: 60, completed: false },
-                            { name: 'Read a story in Japanese', exp: 80, completed: false },
-                            { name: 'Read a news article', exp: 100, completed: false }
-                        ]
+                    'new-language': {
+                        title: 'Learn a New Language',
+                        subSkills: {
+                            'japanese': {
+                                title: 'Japanese',
+                                buildingBlocks: [
+                                    'Learn Hiragana',
+                                    'Learn Katakana',
+                                    'Learn 10 Kanji',
+                                    'Learn 50 Kanji',
+                                    'Learn 100 Kanji',
+                                    'Read a story in Japanese',
+                                    'Read a news article',
+                                    'Have basic conversation',
+                                    'Complete an online course',
+                                    'Teach the Language'
+                                ]
+                            },
+                            'french': {
+                                title: 'French',
+                                buildingBlocks: [
+                                    'Learn basic pronunciation',
+                                    'Master 100 common words',
+                                    'Learn present tense verbs',
+                                    'Practice daily conversations',
+                                    'Read French children\'s book',
+                                    'Watch French movie with subtitles'
+                                ]
+                            },
+                            'spanish': {
+                                title: 'Spanish',
+                                buildingBlocks: [
+                                    'Learn alphabet and sounds',
+                                    'Master 200 vocabulary words',
+                                    'Learn verb conjugations',
+                                    'Practice pronunciation',
+                                    'Have 10-minute conversation',
+                                    'Read Spanish news article'
+                                ]
+                            }
+                        }
                     },
                     'storytelling': {
-                        name: 'Story Telling',
-                        subSkills: [
-                            { name: 'Tell a personal story', exp: 30, completed: false },
-                            { name: 'Create fictional character', exp: 40, completed: false },
-                            { name: 'Practice voice modulation', exp: 50, completed: false },
-                            { name: 'Tell story to children', exp: 60, completed: false },
-                            { name: 'Record storytelling video', exp: 80, completed: false }
+                        title: 'Storytelling',
+                        buildingBlocks: [
+                            'Learn story structure',
+                            'Practice character development',
+                            'Tell story to audience',
+                            'Use voice modulation',
+                            'Master pacing techniques'
                         ]
                     },
                     'teaching': {
-                        name: 'Teaching',
-                        subSkills: [
-                            { name: 'Explain concept to friend', exp: 30, completed: false },
-                            { name: 'Create lesson plan', exp: 50, completed: false },
-                            { name: 'Teach online tutorial', exp: 70, completed: false },
-                            { name: 'Mentor someone', exp: 90, completed: false },
-                            { name: 'Get teaching certification', exp: 120, completed: false }
+                        title: 'Teaching',
+                        buildingBlocks: [
+                            'Teach someone a skill',
+                            'Create lesson plan',
+                            'Practice public speaking',
+                            'Learn different learning styles',
+                            'Give constructive feedback'
                         ]
                     },
                     'acting': {
-                        name: 'Acting',
-                        subSkills: [
-                            { name: 'Practice basic expressions', exp: 25, completed: false },
-                            { name: 'Memorize monologue', exp: 50, completed: false },
-                            { name: 'Join acting class', exp: 70, completed: false },
-                            { name: 'Perform in local theater', exp: 100, completed: false },
-                            { name: 'Create character backstory', exp: 60, completed: false }
+                        title: 'Acting',
+                        buildingBlocks: [
+                            'Practice basic emotions',
+                            'Learn voice projection',
+                            'Study method acting',
+                            'Perform in front of mirror',
+                            'Join acting class or group'
                         ]
                     }
                 }
             },
             'mathematical-logical': {
-                name: 'Mathematical-Logical',
+                title: 'Mathematical-Logical',
+                icon: '🔢',
+                description: 'Develop analytical thinking and mathematical reasoning',
                 skills: {
                     'basic-math': {
-                        name: 'Basic Mathematics',
-                        subSkills: [
-                            { name: 'Master multiplication tables', exp: 30, completed: false },
-                            { name: 'Solve algebraic equations', exp: 50, completed: false },
-                            { name: 'Understand fractions', exp: 40, completed: false },
-                            { name: 'Calculate percentages', exp: 35, completed: false },
-                            { name: 'Work with decimals', exp: 35, completed: false }
-                        ]
-                    },
-                    'geometry': {
-                        name: 'Geometry',
-                        subSkills: [
-                            { name: 'Identify basic shapes', exp: 20, completed: false },
-                            { name: 'Calculate area and perimeter', exp: 40, completed: false },
-                            { name: 'Understand angles', exp: 45, completed: false },
-                            { name: 'Work with triangles', exp: 60, completed: false },
-                            { name: 'Master Pythagorean theorem', exp: 70, completed: false }
-                        ]
-                    },
-                    'statistics': {
-                        name: 'Statistics',
-                        subSkills: [
-                            { name: 'Calculate mean and median', exp: 30, completed: false },
-                            { name: 'Understand probability', exp: 50, completed: false },
-                            { name: 'Create graphs and charts', exp: 45, completed: false },
-                            { name: 'Analyze data trends', exp: 70, completed: false },
-                            { name: 'Conduct statistical test', exp: 90, completed: false }
+                        title: 'Basic Mathematics',
+                        buildingBlocks: [
+                            'Master multiplication tables',
+                            'Practice mental arithmetic',
+                            'Solve word problems',
+                            'Learn fractions and decimals',
+                            'Understand percentages'
                         ]
                     },
                     'programming': {
-                        name: 'Programming',
-                        subSkills: [
-                            { name: 'Learn programming basics', exp: 40, completed: false },
-                            { name: 'Write first program', exp: 60, completed: false },
-                            { name: 'Understand loops and conditions', exp: 80, completed: false },
-                            { name: 'Build a simple app', exp: 120, completed: false },
-                            { name: 'Learn data structures', exp: 100, completed: false }
+                        title: 'Programming',
+                        buildingBlocks: [
+                            'Learn a programming language',
+                            'Build first application',
+                            'Understand algorithms',
+                            'Practice debugging',
+                            'Complete coding challenges'
                         ]
                     },
                     'logic-puzzles': {
-                        name: 'Logic Puzzles',
-                        subSkills: [
-                            { name: 'Solve sudoku puzzle', exp: 25, completed: false },
-                            { name: 'Complete logic grid', exp: 40, completed: false },
-                            { name: 'Master chess basics', exp: 70, completed: false },
-                            { name: 'Solve riddles daily', exp: 30, completed: false },
-                            { name: 'Complete escape room', exp: 80, completed: false }
+                        title: 'Logic Puzzles',
+                        buildingBlocks: [
+                            'Solve Sudoku puzzles',
+                            'Complete logic grid puzzles',
+                            'Master chess basics',
+                            'Practice riddles',
+                            'Learn strategic thinking'
+                        ]
+                    }
+                }
+            },
+            'musical': {
+                title: 'Musical',
+                icon: '🎵',
+                description: 'Explore rhythm, melody, and musical expression',
+                skills: {
+                    'instrument': {
+                        title: 'Learn an Instrument',
+                        subSkills: {
+                            'piano': {
+                                title: 'Piano',
+                                buildingBlocks: [
+                                    'Learn basic finger positions',
+                                    'Practice scales',
+                                    'Play simple melodies',
+                                    'Learn to read sheet music',
+                                    'Play a complete song'
+                                ]
+                            },
+                            'guitar': {
+                                title: 'Guitar',
+                                buildingBlocks: [
+                                    'Learn basic chords',
+                                    'Practice strumming patterns',
+                                    'Play simple songs',
+                                    'Learn fingerpicking',
+                                    'Write original chord progression'
+                                ]
+                            }
+                        }
+                    },
+                    'music-theory': {
+                        title: 'Music Theory',
+                        buildingBlocks: [
+                            'Learn note names',
+                            'Understand scales',
+                            'Study chord progressions',
+                            'Learn rhythm patterns',
+                            'Analyze song structures'
+                        ]
+                    }
+                }
+            },
+            'visual-spatial': {
+                title: 'Visual-Spatial',
+                icon: '🎨',
+                description: 'Develop visual thinking and spatial awareness',
+                skills: {
+                    'drawing': {
+                        title: 'Drawing',
+                        buildingBlocks: [
+                            'Practice basic shapes',
+                            'Learn shading techniques',
+                            'Draw from observation',
+                            'Study proportions',
+                            'Complete daily sketches'
                         ]
                     },
-                    'financial-math': {
-                        name: 'Financial Mathematics',
-                        subSkills: [
-                            { name: 'Calculate compound interest', exp: 40, completed: false },
-                            { name: 'Understand loan payments', exp: 50, completed: false },
-                            { name: 'Budget monthly expenses', exp: 35, completed: false },
-                            { name: 'Learn investment basics', exp: 70, completed: false },
-                            { name: 'File tax returns', exp: 60, completed: false }
+                    'photography': {
+                        title: 'Photography',
+                        buildingBlocks: [
+                            'Learn composition rules',
+                            'Understand lighting',
+                            'Practice different angles',
+                            'Edit photos',
+                            'Create photo series'
+                        ]
+                    }
+                }
+            },
+            'bodily-kinesthetic': {
+                title: 'Bodily-Kinesthetic',
+                icon: '🏃',
+                description: 'Master physical movement and body coordination',
+                skills: {
+                    'fitness': {
+                        title: 'Physical Fitness',
+                        buildingBlocks: [
+                            'Exercise 30 minutes daily',
+                            'Learn proper form',
+                            'Increase flexibility',
+                            'Build strength',
+                            'Improve endurance'
+                        ]
+                    },
+                    'sports': {
+                        title: 'Sports Skills',
+                        buildingBlocks: [
+                            'Learn basic techniques',
+                            'Practice regularly',
+                            'Study game strategy',
+                            'Play with others',
+                            'Join team or league'
+                        ]
+                    }
+                }
+            },
+            'interpersonal': {
+                title: 'Interpersonal',
+                icon: '👥',
+                description: 'Build relationships and social understanding',
+                skills: {
+                    'communication': {
+                        title: 'Communication',
+                        buildingBlocks: [
+                            'Practice active listening',
+                            'Learn body language',
+                            'Give clear instructions',
+                            'Handle conflicts peacefully',
+                            'Show empathy'
+                        ]
+                    },
+                    'leadership': {
+                        title: 'Leadership',
+                        buildingBlocks: [
+                            'Lead a small project',
+                            'Practice delegation',
+                            'Make group decisions',
+                            'Motivate others',
+                            'Give presentations'
+                        ]
+                    }
+                }
+            },
+            'intrapersonal': {
+                title: 'Intrapersonal',
+                icon: '🧠',
+                description: 'Develop self-awareness and inner understanding',
+                skills: {
+                    'meditation': {
+                        title: 'Meditation',
+                        buildingBlocks: [
+                            'Practice daily meditation',
+                            'Learn breathing techniques',
+                            'Develop mindfulness',
+                            'Handle stress better',
+                            'Increase focus'
+                        ]
+                    },
+                    'self-reflection': {
+                        title: 'Self-Reflection',
+                        buildingBlocks: [
+                            'Keep daily journal',
+                            'Identify personal values',
+                            'Set meaningful goals',
+                            'Track progress',
+                            'Celebrate achievements'
+                        ]
+                    }
+                }
+            },
+            'naturalist': {
+                title: 'Naturalist',
+                icon: '🌱',
+                description: 'Connect with nature and understand living systems',
+                skills: {
+                    'gardening': {
+                        title: 'Gardening',
+                        buildingBlocks: [
+                            'Plant seeds',
+                            'Care for plants daily',
+                            'Learn about soil',
+                            'Study plant biology',
+                            'Harvest crops'
+                        ]
+                    },
+                    'wildlife': {
+                        title: 'Wildlife Study',
+                        buildingBlocks: [
+                            'Identify local birds',
+                            'Study animal behavior',
+                            'Track seasonal changes',
+                            'Create nature journal',
+                            'Participate in citizen science'
+                        ]
+                    }
+                }
+            },
+            'existential': {
+                title: 'Existential',
+                icon: '🤔',
+                description: 'Explore meaning, purpose, and big questions',
+                skills: {
+                    'philosophy': {
+                        title: 'Philosophy',
+                        buildingBlocks: [
+                            'Read philosophical texts',
+                            'Question assumptions',
+                            'Debate ethical issues',
+                            'Study different worldviews',
+                            'Develop personal philosophy'
+                        ]
+                    },
+                    'spirituality': {
+                        title: 'Spiritual Practice',
+                        buildingBlocks: [
+                            'Explore different traditions',
+                            'Practice gratitude',
+                            'Seek meaningful experiences',
+                            'Connect with community',
+                            'Find personal purpose'
                         ]
                     }
                 }
             }
         };
-
         // Progress tracking
         let userProgress = {};
 
