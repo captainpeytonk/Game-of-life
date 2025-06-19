@@ -225,6 +225,17 @@
     </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a>/li>
+                <li><a href="locations.html">locations</a>/li>
+                <li><a href="verbal-linguistic.html">verbal-linguistic</a>/li>
+            <ul>
+        <nav>
+        
+        </div>
+
     <div class="container">
         <div class="header">
             <h1>📚 Verbal-Linguistic Skills</h1>
