@@ -65,26 +65,6 @@
             color: white;
         }
 
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
         .categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -358,9 +338,6 @@
         <nav>
         
         </div>
-            
-    <div class="container">
-        <button class="back-btn hidden" onclick="goBack()">← Back</button>
         
         <div class="header">
             <h1 id="page-title">Skill Tree</h1>
@@ -774,7 +751,6 @@
             document.getElementById('page-subtitle').textContent = category.description;
             document.getElementById('categories-view').classList.add('hidden');
             document.getElementById('skills-view').classList.remove('hidden');
-            document.querySelector('.back-btn').classList.remove('hidden');
             
             renderSkills(category.skills);
         }
