@@ -85,13 +85,6 @@
             transform: translateY(-2px);
         }
 
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
         .category-card {
             background: rgba(255,255,255,0.95);
             border-radius: 20px;
@@ -568,43 +561,6 @@
             // Update all displays
             updateAllDisplays();
         }
-
-        // Navigation function
-        function navigateToPage() {
-            const selector = document.getElementById('pageSelector');
-            const selectedPage = selector.value;
-            showPage(selectedPage);
-        }
-
-        // Show specific page
-        function showPage(pageId) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Show selected page
-            document.getElementById(pageId + '-page').classList.add('active');
-            
-            // Update dropdown
-            document.getElementById('pageSelector').value = pageId;
-            
-            currentPage = pageId;
-            updateAllDisplays();
-        }
-
-        // Update all displays
-        function updateAllDisplays() {
-            updateCategoriesDisplay();
-            updateCategoryPageStats('verbal-linguistic');
-            updateCategoryPageStats('mathematical-logical');
-            updateSkillsDisplay('verbal-linguistic');
-            updateSkillsDisplay('mathematical-logical');
-        }
-
-        // Display categories on home page
-        function updateCategoriesDisplay() {
-            const container = document.getElementById('categories');
-            if (!container) return;
             
             container.innerHTML = '';
 
@@ -620,70 +576,6 @@
                     <h2>${category.name}</h2>
                     <div class="category-level">Level ${progress.level}</div>
                     <div class="category-exp">${progress.totalExp} EXP</div>
-                `;
-                
-                container.appendChild(card);
-            }
-        }
-
-        // Update category page statistics
-        function updateCategoryPageStats(categoryKey) {
-            const progress = userProgress[categoryKey];
-            const skillsCompleted = Object.values(progress.skills).filter(skill => skill.level > 0).length;
-            
-            // Update level
-            const levelElement = document.getElementById(categoryKey === 'verbal-linguistic' ? 'verbal-level' : 'math-level');
-            if (levelElement) levelElement.textContent = progress.level;
-            
-            // Update EXP
-            const expElement = document.getElementById(categoryKey === 'verbal-linguistic' ? 'verbal-exp' : 'math-exp');
-            if (expElement) expElement.textContent = progress.totalExp;
-            
-            // Update skills completed
-            const skillsElement = document.getElementById(categoryKey === 'verbal-linguistic' ? 'verbal-skills-completed' : 'math-skills-completed');
-            if (skillsElement) skillsElement.textContent = skillsCompleted;
-        }
-
-        // Update skills display for specific category page
-        function updateSkillsDisplay(categoryKey) {
-            const containerId = categoryKey === 'verbal-linguistic' ? 'verbal-skills-grid' : 'math-skills-grid';
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            
-            container.innerHTML = '';
-
-            for (let skillKey in skillData[categoryKey].skills) {
-                const skill = skillData[categoryKey].skills[skillKey];
-                const progress = userProgress[categoryKey].skills[skillKey];
-                
-                const card = document.createElement('div');
-                card.className = 'skill-card';
-                
-                const expPercent = (progress.exp % 100);
-                const expToNext = expToNextLevel(progress.exp);
-                
-                card.innerHTML = `
-                    <div class="skill-header" onclick="toggleSkillExpansion('${categoryKey}-${skillKey}')">
-                        <div class="skill-title">${skill.name}</div>
-                        <div class="skill-level">Level ${progress.level}</div>
-                        <div class="expand-icon" id="expand-${categoryKey}-${skillKey}">▼</div>
-                    </div>
-                    <div class="skill-exp">${progress.exp} EXP (${expToNext} to next level)</div>
-                    <div class="exp-bar">
-                        <div class="exp-fill" style="width: ${expPercent}%"></div>
-                    </div>
-                    <div class="sub-skills" id="subskills-${categoryKey}-${skillKey}">
-                        ${skill.subSkills.map((subSkill, index) => `
-                            <div class="sub-skill">
-                                <input type="checkbox" 
-                                       id="sub-${categoryKey}-${skillKey}-${index}" 
-                                       ${subSkill.completed ? 'checked disabled' : ''}
-                                       onchange="toggleSubSkill('${categoryKey}', '${skillKey}', ${index})">
-                                <label for="sub-${categoryKey}-${skillKey}-${index}">${subSkill.name}</label>
-                                <div class="sub-skill-exp">+${subSkill.exp} EXP</div>
-                            </div>
-                        `).join('')}
-                    </div>
                 `;
                 
                 container.appendChild(card);
