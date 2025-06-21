@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Multiple Intelligences Wheel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 700px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        
+        .wheel-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+        }
+        
+        .wheel-section {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .wheel-section:hover {
+            filter: drop-shadow(4px 4px 8px rgba(0,0,0,0.3));
+            transform: scale(1.02);
+        }
+        
+        .section-text {
+            font-size: 12px;
+            font-weight: bold;
+            fill: white;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .section-icon {
+            font-size: 20px;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+        
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            font-weight: bold;
+            font-size: 11px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 20;
+            pointer-events: none;
+        }
+        
+        .gear-icon {
+            font-size: 30px;
+            margin-bottom: 5px;
+            color: #e74c3c;
+        }
+        
+        .info-panel {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border-left: 5px solid #007bff;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        
+        .info-panel h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        
+        .info-panel p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 600px) {
+            .wheel-container {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .center-circle {
+                width: 100px;
+                height: 100px;
+                font-size: 9px;
+            }
+            
+            .section-text {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Types of Multiple Intelligences</h1>
+        
+        <div class="wheel-container">
+            <svg width="500" height="500" viewBox="0 0 500 500">
+                <!-- Linguistic Intelligence (0° to 40°) -->
+                <path d="M 250,250 L 250,50 A 200,200 0 0,1 378.56,98.78 Z" 
+                      fill="url(#linguistic-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('linguistic')" />
+                <text x="335" y="90" class="section-icon">🗣️</text>
+                <text x="335" y="110" class="section-text">LINGUISTIC</text>
+                <text x="335" y="125" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Naturalistic Intelligence (40° to 80°) -->
+                <path d="M 250,250 L 378.56,98.78 A 200,200 0 0,1 428.48,185.32 Z" 
+                      fill="url(#naturalistic-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('naturalistic')" />
+                <text x="410" y="150" class="section-icon">🌿</text>
+                <text x="410" y="170" class="section-text">NATURALISTIC</text>
+                <text x="410" y="185" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Logical-Mathematical Intelligence (80° to 120°) -->
+                <path d="M 250,250 L 428.48,185.32 A 200,200 0 0,1 428.48,314.68 Z" 
+                      fill="url(#logical-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('logical')" />
+                <text x="420" y="240" class="section-icon">📊</text>
+                <text x="420" y="260" class="section-text">LOGICAL-MATHEMATICAL</text>
+                <text x="420" y="275" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Interpersonal Intelligence (120° to 160°) -->
+                <path d="M 250,250 L 428.48,314.68 A 200,200 0 0,1 378.56,401.22 Z" 
+                      fill="url(#interpersonal-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('interpersonal')" />
+                <text x="410" y="350" class="section-icon">👥</text>
+                <text x="410" y="370" class="section-text">INTERPERSONAL</text>
+                <text x="410" y="385" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Visual-Spatial Intelligence (160° to 200°) -->
+                <path d="M 250,250 L 378.56,401.22 A 200,200 0 0,1 250,450 Z" 
+                      fill="url(#visual-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('visual')" />
+                <text x="320" y="415" class="section-icon">🎨</text>
+                <text x="320" y="435" class="section-text">VISUAL-SPATIAL</text>
+                <text x="320" y="450" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Musical Intelligence (200° to 240°) -->
+                <path d="M 250,250 L 250,450 A 200,200 0 0,1 121.44,401.22 Z" 
+                      fill="url(#musical-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('musical')" />
+                <text x="165" y="415" class="section-icon">🎵</text>
+                <text x="165" y="435" class="section-text">MUSICAL</text>
+                <text x="165" y="450" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Bodily-Kinesthetic Intelligence (240° to 280°) -->
+                <path d="M 250,250 L 121.44,401.22 A 200,200 0 0,1 71.52,314.68 Z" 
+                      fill="url(#bodily-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('bodily')" />
+                <text x="90" y="350" class="section-icon">🏋️</text>
+                <text x="90" y="370" class="section-text">BODILY-KINESTHETIC</text>
+                <text x="90" y="385" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Intrapersonal Intelligence (280° to 320°) -->
+                <path d="M 250,250 L 71.52,314.68 A 200,200 0 0,1 71.52,185.32 Z" 
+                      fill="url(#intrapersonal-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('intrapersonal')" />
+                <text x="80" y="240" class="section-icon">🧘</text>
+                <text x="80" y="260" class="section-text">INTRAPERSONAL</text>
+                <text x="80" y="275" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Existential Intelligence (320° to 360°) -->
+                <path d="M 250,250 L 71.52,185.32 A 200,200 0 0,1 250,50 Z" 
+                      fill="url(#existential-gradient)" 
+                      class="wheel-section" 
+                      onclick="showInfo('existential')" />
+                <text x="105" y="125" class="section-icon">🧘‍♀️</text>
+                <text x="105" y="145" class="section-text">EXISTENTIAL</text>
+                <text x="105" y="160" class="section-text">INTELLIGENCE</text>
+                
+                <!-- Gradients -->
+                <defs>
+                    <linearGradient id="linguistic-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f7931e;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="naturalistic-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f7931e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ffd700;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="logical-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#32cd32;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="interpersonal-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#32cd32;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#20b2aa;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="visual-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#20b2aa;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4169e1;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="musical-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4169e1;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8a2be2;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="bodily-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#8a2be2;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#9932cc;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="intrapersonal-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#9932cc;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#dc143c;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="existential-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#dc143c;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            
+            <div class="center-circle">
+                <div class="gear-icon">⚙️</div>
+                <div>TYPES OF<br><span style="color: #e74c3c;">MULTIPLE<br>INTELLIGENCES</span></div>
+            </div>
+        </div>
+        
+        <div class="info-panel" id="infoPanel">
+            <h3>Click on any section to learn more!</h3>
+            <p>Each section of the wheel represents a different type of intelligence according to Howard Gardner's theory of multiple intelligences. Click on any colored section to discover more about that specific intelligence type.</p>
+        </div>
+    </div>
+
+    <script>
+        const intelligenceInfo = {
+            linguistic: {
+                title: "Linguistic Intelligence",
+                description: "This intelligence involves sensitivity to spoken and written language, the ability to learn languages, and the capacity to use language to accomplish certain goals. People with high linguistic intelligence are skilled at reading, writing, telling stories, and memorizing words and dates. They tend to be good at explaining, teaching, and learning through verbal instruction."
+            },
+            naturalistic: {
+                title: "Naturalistic Intelligence",
+                description: "This intelligence involves expertise in the recognition and classification of the numerous species of flora and fauna in an individual's environment. It also includes sensitivity to other natural phenomena and the ability to distinguish among inanimate objects. People with naturalistic intelligence are often interested in nurturing, exploring the environment, and learning about other species."
+            },
+            logical: {
+                title: "Logical-Mathematical Intelligence",
+                description: "This intelligence involves the capacity to analyze problems logically, carry out mathematical operations, and investigate issues scientifically. People with strong logical-mathematical intelligence are good at reasoning, recognizing patterns, and logically analyzing problems. They tend to think conceptually about numbers, relationships, and patterns."
+            },
+            interpersonal: {
+                title: "Interpersonal Intelligence",
+                description: "This intelligence involves the capacity to understand the intentions, motivations, and desires of other people. It allows people to work effectively with others. Educators, salespeople, religious leaders, politicians, and counselors all need a well-developed interpersonal intelligence. These individuals are skilled at assessing emotions, motivations, and intentions of those around them."
+            },
+            visual: {
+                title: "Visual-Spatial Intelligence",
+                description: "This intelligence involves the potential to recognize and use the patterns of wide space and more confined areas. People with strong visual-spatial intelligence are typically very good at visualizing and mentally manipulating objects. They have excellent visual memory and are often good at drawing, designing, and creating visual presentations."
+            },
+            musical: {
+                title: "Musical Intelligence",
+                description: "This intelligence involves skill in the performance, composition, and appreciation of musical patterns. It encompasses the capacity to recognize and compose musical pitches, tones, and rhythms. People with musical intelligence often think in sounds, rhythms, and patterns. They may be accomplished musicians or have a strong appreciation for music."
+            },
+            bodily: {
+                title: "Bodily-Kinesthetic Intelligence",
+                description: "This intelligence involves the potential of using one's whole body or parts of the body to solve problems. It is the ability to use mental abilities to coordinate bodily movements. Athletes, dancers, surgeons, and crafts people exhibit well-developed bodily-kinesthetic intelligence. These individuals learn best through movement and experimentation."
+            },
+            intrapersonal: {
+                title: "Intrapersonal Intelligence",
+                description: "This intelligence involves the capacity to understand oneself and one's thoughts and feelings, and to use such knowledge in planning and directing one's life. Intrapersonal intelligence involves not only an appreciation of the self, but also of the human condition. People with strong intrapersonal intelligence are often introspective and enjoy self-reflection, philosophy, and spirituality."
+            },
+            existential: {
+                title: "Existential Intelligence",
+                description: "This intelligence involves the capacity to tackle deep questions about human existence, such as the meaning of life, why we die, and how we got here. People with existential intelligence are often concerned with ultimate issues and may be drawn to philosophy, theology, or other fields that explore the big questions of existence. They think about life's larger purposes and meanings."
+            }
+        };
+
+        function showInfo(type) {
+            const info = intelligenceInfo[type];
+            const panel = document.getElementById('infoPanel');
+            
+            panel.innerHTML = `
+                <h3>${info.title}</h3>
+                <p>${info.description}</p>
+            `;
+            
+            // Add a subtle animation
+            panel.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                panel.style.transform = 'scale(1)';
+            }, 100);
+        }
+    </script>
+</body>
+</html>
