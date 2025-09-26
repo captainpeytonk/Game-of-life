@@ -1,0 +1,47 @@
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+
+const Index = () => {
+  // Generate years from 1999 to 2025
+  const years = Array.from({ length: 27 }, (_, i) => 1999 + i);
+
+  return (
+    <div className="h-screen w-screen bg-background">
+      <div className="p-4">
+        <h1 className="text-2xl font-bold text-foreground mb-4">Life Timeline (1999-2025)</h1>
+      </div>
+      
+      <ScrollArea className="h-[calc(100vh-80px)] w-full">
+        <div className="flex gap-2 p-4" style={{ width: `${years.length * 620}px` }}>
+          {years.map((year) => (
+            <div key={year} className="flex-shrink-0 relative">
+              <img
+                src={`./Life ${year}.jpg`}
+                alt={`Life ${year}`}
+                className="block"
+                style={{ 
+                  width: '615px', 
+                  height: '154px',
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.backgroundColor = 'hsl(var(--muted))';
+                  target.style.display = 'flex';
+                  target.style.alignItems = 'center';
+                  target.style.justifyContent = 'center';
+                  target.alt = `Life ${year} (not found)`;
+                }}
+              />
+              <div className="absolute bottom-2 left-2 bg-background/80 text-foreground px-2 py-1 rounded text-sm">
+                {year}
+              </div>
+            </div>
+          ))}
+        </div>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
+    </div>
+  );
+};
+
+export default Index;
