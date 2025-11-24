@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Tree</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #d4af37;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+        }
+
+        .skills-panel {
+            background: linear-gradient(145deg, #2a2420, #3d3530);
+            border: 4px solid #5a4a3a;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 
+                inset 0 2px 5px rgba(0,0,0,0.5),
+                0 5px 15px rgba(0,0,0,0.7);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .skill-slot {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #3a3530 0%, #2d2822 100%);
+            border: 3px solid #5a4a3a;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 
+                inset 0 1px 3px rgba(255,255,255,0.1),
+                0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .skill-slot:hover {
+            transform: translateY(-3px);
+            border-color: #8b7355;
+            box-shadow: 
+                inset 0 1px 3px rgba(255,255,255,0.2),
+                0 4px 10px rgba(0,0,0,0.7),
+                0 0 15px rgba(212,175,55,0.3);
+        }
+
+        .skill-slot:active {
+            transform: translateY(0);
+        }
+
+        .skill-icon {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5));
+        }
+
+        .skill-level {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #d4af37;
+            text-shadow: 
+                1px 1px 2px rgba(0,0,0,0.8),
+                0 0 5px rgba(212,175,55,0.5);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .level-number {
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .total-level {
+            background: linear-gradient(135deg, #4a3a2a 0%, #3a2a1a 100%);
+            border: 3px solid #6a5a4a;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 
+                inset 0 1px 3px rgba(255,255,255,0.1),
+                0 3px 8px rgba(0,0,0,0.6);
+        }
+
+        .total-level-label {
+            color: #a0a0a0;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .total-level-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 
+                2px 2px 4px rgba(0,0,0,0.8),
+                0 0 10px rgba(255,215,0,0.6);
+        }
+
+        /* Tooltip */
+        .skill-slot::before {
+            content: attr(data-name);
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            color: #d4af37;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            border: 1px solid #5a4a3a;
+            z-index: 10;
+        }
+
+        .skill-slot:hover::before {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .skill-icon {
+                font-size: 2em;
+            }
+
+            .skill-level {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .skill-icon {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚔️ Skill Tree ⚔️</h1>
+            <p style="color: #a0a0a0;">Track your progress across all abilities</p>
+        </div>
+
+        <div class="skills-panel">
+            <div class="skills-grid" id="skillsGrid">
+                <!-- Skills will be populated by JavaScript -->
+            </div>
+
+            <div class="total-level">
+                <div class="total-level-label">Total Level</div>
+                <div class="total-level-number" id="totalLevel">0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Skill categories with their data
+        const skillCategories = [
+            { id: 'verbal-linguistic', name: 'Verbal-Linguistic', icon: '📚', page: 'verbal-linguistic.html' },
+            { id: 'mathematical-logical', name: 'Mathematical-Logical', icon: '🔢', page: 'mathematical-logical.html' },
+            { id: 'musical', name: 'Musical', icon: '🎵', page: 'musical.html' },
+            { id: 'visual-spatial', name: 'Visual-Spatial', icon: '🎨', page: 'visual-spatial.html' },
+            { id: 'bodily-kinesthetic', name: 'Bodily-Kinesthetic', icon: '🏃', page: 'bodily-kinesthetic.html' },
+            { id: 'interpersonal', name: 'Interpersonal', icon: '👥', page: 'interpersonal.html' },
+            { id: 'intrapersonal', name: 'Intrapersonal', icon: '🧠', page: 'intrapersonal.html' },
+            { id: 'naturalist', name: 'Naturalist', icon: '🌱', page: 'naturalist.html' },
+            { id: 'existential', name: 'Existential', icon: '🤔', page: 'existential.html' }
+        ];
+
+        // Function to calculate level from a skill page's data
+        function getSkillLevel(categoryId) {
+            // Try to get data from localStorage that the skill page would have saved
+            const storageKey = `${categoryId}-progress`;
+            const savedData = localStorage.getItem(storageKey);
+            
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    return data.level || 0;
+                } catch (e) {
+                    return 0;
+                }
+            }
+            
+            return 0;
+        }
+
+        // Function to render all skills
+        function renderSkills() {
+            const grid = document.getElementById('skillsGrid');
+            grid.innerHTML = '';
+            
+            let totalLevel = 0;
+
+            skillCategories.forEach(category => {
+                const level = getSkillLevel(category.id);
+                totalLevel += level;
+
+                const skillSlot = document.createElement('div');
+                skillSlot.className = 'skill-slot';
+                skillSlot.setAttribute('data-name', category.name);
+                skillSlot.onclick = () => navigateToSkill(category.page);
+
+                skillSlot.innerHTML = `
+                    <div class="skill-icon">${category.icon}</div>
+                    <div class="skill-level">
+                        <span class="level-number">${level}</span>
+                    </div>
+                `;
+
+                grid.appendChild(skillSlot);
+            });
+
+            // Update total level
+            document.getElementById('totalLevel').textContent = totalLevel;
+        }
+
+        // Navigate to specific skill page
+        function navigateToSkill(page) {
+            window.location.href = page;
+        }
+
+        // Listen for storage changes (when other tabs update skill data)
+        window.addEventListener('storage', (e) => {
+            if (e.key && e.key.endsWith('-progress')) {
+                renderSkills();
+            }
+        });
+
+        // Initial render
+        renderSkills();
+
+        // Refresh every 2 seconds to catch localStorage updates
+        setInterval(renderSkills, 2000);
+    </script>
+</body>
+</html>
