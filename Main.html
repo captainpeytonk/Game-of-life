@@ -219,23 +219,35 @@
             { id: 'existential', name: 'Existential', icon: '🤔', page: 'existential.html' }
         ];
 
-        // Function to calculate level from a skill page's data
-        function getSkillLevel(categoryId) {
-            // Try to get data from localStorage that the skill page would have saved
-            const storageKey = `${categoryId}-progress`;
-            const savedData = localStorage.getItem(storageKey);
-            
-            if (savedData) {
-                try {
-                    const data = JSON.parse(savedData);
-                    return data.level || 0;
-                } catch (e) {
-                    return 0;
-                }
-            }
-            
+function getSkillLevel(categoryId) {
+
+    // Key type used by most pages
+    const standardKey = `${categoryId}-progress`;
+
+    // Key used specifically by Bodily-Kinesthetic page
+    const bodilyKey = "bodilyKinestheticProgress";
+
+    let savedData = null;
+
+    // If this is the bodily page, look for its special key
+    if (categoryId === "bodily-kinesthetic") {
+        savedData = localStorage.getItem(bodilyKey);
+    } else {
+        savedData = localStorage.getItem(standardKey);
+    }
+
+    if (savedData) {
+        try {
+            const data = JSON.parse(savedData);
+            return data.level || 0;
+        } catch {
             return 0;
         }
+    }
+
+    return 0;
+}
+
 
         // Function to render all skills
         function renderSkills() {
