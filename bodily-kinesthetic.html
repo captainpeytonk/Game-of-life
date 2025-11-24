@@ -261,6 +261,8 @@
 
     <script>
         // Verbal-Linguistic skills data
+const LOCAL_STORAGE_KEY = "bodilyKinestheticProgress";
+        
         const skillData = {
             'reading': {
                 name: 'Reading',
@@ -344,152 +346,83 @@
         };
 
         // Initialize progress tracking
-        function initializeProgress() {
-            for (let skillKey in skillData) {
-                userProgress.skills[skillKey] = {
-                    exp: 0,
-                    level: 0,
-                    completedSubSkills: []
-                };
-            }
-        }
+function initializeProgress() {
+// Load saved progress if available
+const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+if (saved) {
+userProgress = JSON.parse(saved);
+// Restore completed flags into skillData
+for (let skillKey in userProgress.skills) {
+let completedList = userProgress.skills[skillKey].completedSubSkills;
+if (skillData[skillKey]) {
+completedList.forEach(i => {
+skillData[skillKey].subSkills[i].completed = true;
+});
+}
+}
+return;
+}
 
-        // Calculate level based on experience
-        function calculateLevel(exp) {
-            return Math.floor(exp / 100);
-        }
+    
 
-        // Calculate experience needed for next level
-        function expToNextLevel(exp) {
-            const currentLevel = calculateLevel(exp);
-            const nextLevelExp = (currentLevel + 1) * 100;
-            return nextLevelExp - exp;
-        }
+function saveProgress() {
+container.innerHTML = '';
 
-        // Show level up modal
-        function showLevelUpModal(skillName, newLevel, isCategory = false) {
-            const modal = document.getElementById('levelUpModal');
-            const text = document.getElementById('levelUpText');
-            
-            if (isCategory) {
-                text.textContent = `Verbal-Linguistic category reached level ${newLevel}!`;
-            } else {
-                text.textContent = `${skillName} skill reached level ${newLevel}!`;
-            }
-            
-            modal.style.display = 'block';
-        }
 
-        // Close level up modal
-        function closeLevelUpModal() {
-            document.getElementById('levelUpModal').style.display = 'none';
-        }
+for (let skillKey in skillData) {
+const skill = skillData[skillKey];
+const prog = userProgress.skills[skillKey];
+const expPercent = (prog.exp % 100);
+const expToNext = expToNextLevel(prog.exp);
 
-        // Handle sub-skill completion
-        function toggleSubSkill(skillKey, subSkillIndex) {
-            const skill = skillData[skillKey];
-            const subSkill = skill.subSkills[subSkillIndex];
-            
-            if (subSkill.completed) {
-                return; // Already completed
-            }
 
-            // Mark as completed
-            subSkill.completed = true;
-            
-            // Add experience
-            const oldSkillLevel = userProgress.skills[skillKey].level;
-            const oldCategoryLevel = userProgress.level;
-            
-            userProgress.skills[skillKey].exp += subSkill.exp;
-            userProgress.totalExp += subSkill.exp;
-            userProgress.skills[skillKey].completedSubSkills.push(subSkillIndex);
-            
-            // Update levels
-            const newSkillLevel = calculateLevel(userProgress.skills[skillKey].exp);
-            const newCategoryLevel = calculateLevel(userProgress.totalExp);
-            
-            userProgress.skills[skillKey].level = newSkillLevel;
-            userProgress.level = newCategoryLevel;
-            
-            // Show level up modals
-            if (newSkillLevel > oldSkillLevel) {
-                setTimeout(() => showLevelUpModal(skill.name, newSkillLevel), 100);
-            }
-            
-            if (newCategoryLevel > oldCategoryLevel) {
-                setTimeout(() => showLevelUpModal(skill.name, newCategoryLevel, true), 500);
-            }
-            
-            // Update UI
-            updateSkillsDisplay();
-            updateCategoryStats();
-        }
+const card = document.createElement('div');
+card.className = 'skill-card';
 
-        // Update category stats
-        function updateCategoryStats() {
-            document.getElementById('categoryLevel').textContent = `Level ${userProgress.level}`;
-            document.getElementById('categoryExp').textContent = `${userProgress.totalExp} EXP`;
-        }
 
-        // Update skills display
-        function updateSkillsDisplay() {
-            const container = document.getElementById('skillsGrid');
-            container.innerHTML = '';
+card.innerHTML = `
+<div class="skill-header" onclick="toggleSkillExpansion('${skillKey}')">
+<div class="skill-title">${skill.name}</div>
+<div style="display:flex; align-items:center;">
+<div class="skill-level">Level ${prog.level}</div>
+<div class="expand-icon" id="expand-${skillKey}">▼</div>
+</div>
+</div>
+<div class="skill-exp">${prog.exp} EXP (${expToNext} to next level)</div>
+<div class="exp-bar"><div class="exp-fill" style="width:${expPercent}%"></div></div>
+<div class="sub-skills" id="subskills-${skillKey}">
+${skill.subSkills.map((s, i) => `
+<div class="sub-skill">
+<input type="checkbox" id="sub-${skillKey}-${i}" ${s.completed ? 'checked disabled' : ''}
+onchange="toggleSubSkill('${skillKey}', ${i})">
+<label for="sub-${skillKey}-${i}">${s.name}</label>
+<div class="sub-skill-exp">+${s.exp} EXP</div>
+</div>
+`).join('')}
+</div>`;
 
-            for (let skillKey in skillData) {
-                const skill = skillData[skillKey];
-                const progress = userProgress.skills[skillKey];
-                
-                const card = document.createElement('div');
-                card.className = 'skill-card';
-                
-                const expPercent = (progress.exp % 100);
-                const expToNext = expToNextLevel(progress.exp);
-                
-                card.innerHTML = `
-                    <div class="skill-header" onclick="toggleSkillExpansion('${skillKey}')">
-                        <div class="skill-title">${skill.name}</div>
-                        <div style="display: flex; align-items: center;">
-                            <div class="skill-level">Level ${progress.level}</div>
-                            <div class="expand-icon" id="expand-${skillKey}">▼</div>
-                        </div>
-                    </div>
-                    <div class="skill-exp">${progress.exp} EXP (${expToNext} to next level)</div>
-                    <div class="exp-bar">
-                        <div class="exp-fill" style="width: ${expPercent}%"></div>
-                    </div>
-                    <div class="sub-skills" id="subskills-${skillKey}">
-                        ${skill.subSkills.map((subSkill, index) => `
-                            <div class="sub-skill">
-                                <input type="checkbox" 
-                                       id="sub-${skillKey}-${index}" 
-                                       ${subSkill.completed ? 'checked disabled' : ''}
-                                       onchange="toggleSubSkill('${skillKey}', ${index})">
-                                <label for="sub-${skillKey}-${index}">${subSkill.name}</label>
-                                <div class="sub-skill-exp">+${subSkill.exp} EXP</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                
-                container.appendChild(card);
-            }
-        }
 
-        // Toggle skill expansion
-        function toggleSkillExpansion(skillKey) {
-            const subSkills = document.getElementById(`subskills-${skillKey}`);
-            const icon = document.getElementById(`expand-${skillKey}`);
-            
-            subSkills.classList.toggle('expanded');
-            icon.classList.toggle('rotated');
-        }
+container.appendChild(card);
+}
+}
 
-        // Initialize the application
-        initializeProgress();
-        updateSkillsDisplay();
-        updateCategoryStats();
-    </script>
+
+function toggleSkillExpansion(skillKey) {
+const box = document.getElementById(`subskills-${skillKey}`);
+const icon = document.getElementById(`expand-${skillKey}`);
+box.classList.toggle('expanded');
+icon.classList.toggle('rotated');
+}
+
+
+// Initialize page
+initializeProgress();
+updateSkillsDisplay();
+updateCategoryStats();
+
+
+// Auto-save when page is closed
+window.addEventListener('beforeunload', saveProgress);
+</script>
 </body>
 </html>
