@@ -1,0 +1,16 @@
+{
+	"tree": {
+		"en": "Tree",
+		"es": "Árbol",
+		"fr": "Arbre",
+		"de": "Baum",
+		"ja": "木"
+	},
+	"rock": {
+		"en": "Rock",
+		"es": "Roca",
+		"fr": "Rocher",
+		"de": "Stein",
+		"ja": "岩"
+	}
+}
